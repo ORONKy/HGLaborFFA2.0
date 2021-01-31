@@ -1,19 +1,25 @@
 package de.hglabor.plugins.ffa.player;
 
 import de.hglabor.plugins.ffa.util.ScoreboardFactory;
-import de.hglabor.plugins.kitapi.player.KitPlayer;
+import de.hglabor.plugins.kitapi.player.KitPlayerImpl;
+import de.hglabor.plugins.kitapi.util.Utils;
 import org.bukkit.Bukkit;
+import org.bukkit.entity.Player;
+import org.bukkit.scoreboard.Objective;
+import org.bukkit.scoreboard.Scoreboard;
 
+import java.util.Locale;
 import java.util.UUID;
 
-public abstract class FFAPlayer implements KitPlayer, ScoreboardFactory.ScoreboardPlayer {
-    protected final UUID uuid;
+public class FFAPlayer extends KitPlayerImpl implements ScoreboardFactory.ScoreboardPlayer {
     protected final String name;
     protected int kills;
     protected Status status;
+    protected Scoreboard scoreboard;
+    protected Objective objective;
 
     protected FFAPlayer(UUID uuid) {
-        this.uuid = uuid;
+        super(uuid);
         this.status = Status.KITSELECTION;
         this.name = Bukkit.getOfflinePlayer(uuid).getName();
     }
@@ -34,6 +40,15 @@ public abstract class FFAPlayer implements KitPlayer, ScoreboardFactory.Scoreboa
         return kills;
     }
 
+    public void setKills(int kills) {
+        this.kills = kills;
+    }
+
+    @Override
+    public boolean isValid() {
+        return isInArena();
+    }
+
     public boolean isInKitSelection() {
         return status == Status.KITSELECTION;
     }
@@ -46,13 +61,42 @@ public abstract class FFAPlayer implements KitPlayer, ScoreboardFactory.Scoreboa
         this.status = status;
     }
 
-    public abstract boolean isInCombat();
+    //TODO yo
+    public boolean isInCombat() {
+        return false;
+    }
 
-    public void setKills(int kills) {
-        this.kills = kills;
+    @Override
+    public Scoreboard getScoreboard() {
+        return scoreboard;
+    }
+
+    @Override
+    public void setScoreboard(Scoreboard scoreboard) {
+        this.scoreboard = scoreboard;
+    }
+
+    @Override
+    public Objective getObjective() {
+        return objective;
+    }
+
+    @Override
+    public void setObjective(Objective objective) {
+        this.objective = objective;
+    }
+
+    @Override
+    public Locale getLocale() {
+        return Utils.getPlayerLocale(uuid);
+    }
+
+    @Override
+    public Player getPlayer() {
+        return Bukkit.getPlayer(uuid);
     }
 
     public enum Status {
-        KITSELECTION,ARENA,SPECTATOR,
+        KITSELECTION, ARENA, SPECTATOR,
     }
 }

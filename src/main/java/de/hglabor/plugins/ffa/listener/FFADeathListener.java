@@ -2,7 +2,6 @@ package de.hglabor.plugins.ffa.listener;
 
 import de.hglabor.plugins.ffa.Main;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
-import de.hglabor.plugins.ffa.player.PlayerData;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
 import org.bukkit.Bukkit;
@@ -14,7 +13,6 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Consumer;

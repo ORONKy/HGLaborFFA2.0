@@ -4,7 +4,6 @@ import de.hglabor.plugins.ffa.commands.ReloadMapCommand;
 import de.hglabor.plugins.ffa.commands.SuicideCommand;
 import de.hglabor.plugins.ffa.config.FFAConfig;
 import de.hglabor.plugins.ffa.gamemechanics.*;
-import de.hglabor.plugins.ffa.kit.KitAbilityListener;
 import de.hglabor.plugins.ffa.kit.KitItemListener;
 import de.hglabor.plugins.ffa.kit.KitItemSupplierImpl;
 import de.hglabor.plugins.ffa.kit.KitSelectorFFA;
@@ -21,6 +20,7 @@ import de.hglabor.plugins.ffa.world.ArenaSettings;
 import de.hglabor.plugins.kitapi.config.KitApiConfig;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
 import de.hglabor.plugins.kitapi.kit.KitManager;
+import de.hglabor.plugins.kitapi.kit.events.KitEventHandlerImpl;
 import de.hglabor.utils.localization.Localization;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
@@ -89,7 +89,7 @@ public final class Main extends JavaPlugin {
             }
         }
         pluginManager.registerEvents(new ArenaSettings(), this);
-        pluginManager.registerEvents(new KitAbilityListener(), this);
+        pluginManager.registerEvents(new KitEventHandlerImpl(PlayerList.getInstance()), this);
         pluginManager.registerEvents(new KitItemListener(), this);
         pluginManager.registerEvents(new FFAJoinListener(), this);
         pluginManager.registerEvents(new FFAQuitListener(), this);

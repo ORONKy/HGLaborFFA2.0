@@ -20,7 +20,7 @@ public final class PlayerList implements KitPlayerSupplier {
     }
 
     public FFAPlayer getPlayer(UUID uuid) {
-        return players.computeIfAbsent(uuid, PlayerData::new);
+        return players.computeIfAbsent(uuid, FFAPlayer::new);
     }
 
     public void add(FFAPlayer ffaPlayer) {

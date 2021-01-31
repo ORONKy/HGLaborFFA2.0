@@ -16,7 +16,6 @@ import de.hglabor.plugins.ffa.gamemechanics.Feast;
 import de.hglabor.plugins.ffa.gamemechanics.SkyBorder;
 import de.hglabor.plugins.ffa.kit.KitSelectorFFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
-import de.hglabor.plugins.ffa.player.PlayerData;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.HideUtils;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
@@ -69,7 +68,7 @@ public class ArenaManager {
     }
 
     public void prepareKitSelection(Player player) {
-        PlayerData ffaPlayer = (PlayerData) PlayerList.getInstance().getPlayer(player);
+        FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
 
         ffaPlayer.setStatus(FFAPlayer.Status.KITSELECTION);
         ffaPlayer.getKits().forEach(kit -> kit.disable(ffaPlayer));
