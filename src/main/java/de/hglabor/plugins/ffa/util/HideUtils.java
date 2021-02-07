@@ -1,11 +1,11 @@
 package de.hglabor.plugins.ffa.util;
 
-import de.hglabor.utils.localization.Localization;
 import de.hglabor.plugins.ffa.Main;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.kitapi.kit.KitManager;
 import de.hglabor.plugins.kitapi.util.Utils;
+import de.hglabor.utils.localization.Localization;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -32,16 +32,20 @@ public final class HideUtils implements Listener {
     }
 
     public void hidePlayersInKitSelection(Player player) {
-        for (FFAPlayer playerInKitSelection : PlayerList.getInstance().getPlayersInKitSelection()) {
-            Player playerToHide = playerInKitSelection.getPlayer();
-            player.hidePlayer(Main.getPlugin(), playerToHide);
+        if (player != null) {
+            for (FFAPlayer playerInKitSelection : PlayerList.getInstance().getPlayersInKitSelection()) {
+                Player playerToHide = playerInKitSelection.getPlayer();
+                player.hidePlayer(Main.getPlugin(), playerToHide);
+            }
         }
     }
 
     public void showPlayersInKitSelection(Player player) {
-        for (FFAPlayer playerInKitSelection : PlayerList.getInstance().getPlayersInKitSelection()) {
-            Player playerToShow = playerInKitSelection.getPlayer();
-            player.showPlayer(Main.getPlugin(), playerToShow);
+        if (player != null) {
+            for (FFAPlayer playerInKitSelection : PlayerList.getInstance().getPlayersInKitSelection()) {
+                Player playerToShow = playerInKitSelection.getPlayer();
+                player.showPlayer(Main.getPlugin(), playerToShow);
+            }
         }
     }
 
