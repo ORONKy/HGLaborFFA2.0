@@ -1,5 +1,6 @@
 package de.hglabor.plugins.ffa.gamemechanics;
 
+import de.hglabor.plugins.kitapi.kit.config.KitMetaData;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -30,7 +31,7 @@ public class SoupHealing implements Listener {
                 return;
             }
             int amountToHeal = 7;
-            if (itemStack.hasItemMeta() && event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase("Spit Soup")) {
+            if (itemStack.hasItemMeta() && event.getItem().getItemMeta().getDisplayName().equalsIgnoreCase(KitMetaData.SPIT_SOUP.getKey())) {
                 amountToHeal = 3;
             }
             if (player.getHealth() < player.getMaxHealth()) {
