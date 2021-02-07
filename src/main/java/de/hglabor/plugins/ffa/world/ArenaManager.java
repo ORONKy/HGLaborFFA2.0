@@ -64,6 +64,8 @@ public class ArenaManager {
         this.world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         this.world.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
         this.world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
+        this.world.setGameRule(GameRule.SPAWN_RADIUS, 0);
+        this.world.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false);
         this.copyMap();
     }
 
