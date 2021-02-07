@@ -70,6 +70,9 @@ public class ArenaManager {
     }
 
     public void prepareKitSelection(Player player) {
+        if (player == null) {
+            return;
+        }
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
 
         ffaPlayer.setStatus(FFAPlayer.Status.KITSELECTION);
