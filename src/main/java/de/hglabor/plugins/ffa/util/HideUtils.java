@@ -35,7 +35,9 @@ public final class HideUtils implements Listener {
         if (player != null) {
             for (FFAPlayer playerInKitSelection : PlayerList.getInstance().getPlayersInKitSelection()) {
                 Player playerToHide = playerInKitSelection.getPlayer();
-                player.hidePlayer(Main.getPlugin(), playerToHide);
+                if (playerToHide != null) {
+                    player.hidePlayer(Main.getPlugin(), playerToHide);
+                }
             }
         }
     }
@@ -44,7 +46,9 @@ public final class HideUtils implements Listener {
         if (player != null) {
             for (FFAPlayer playerInKitSelection : PlayerList.getInstance().getPlayersInKitSelection()) {
                 Player playerToShow = playerInKitSelection.getPlayer();
-                player.showPlayer(Main.getPlugin(), playerToShow);
+                if (playerToShow != null) {
+                    player.showPlayer(Main.getPlugin(), playerToShow);
+                }
             }
         }
     }
