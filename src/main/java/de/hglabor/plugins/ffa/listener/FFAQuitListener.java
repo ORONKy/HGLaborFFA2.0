@@ -18,7 +18,6 @@ public class FFAQuitListener implements Listener {
         if (ffaPlayer.isInCombat()) {
             event.getPlayer().setHealth(0);
         }
-        Utils.broadcastMessage("hglabor.quitMessage", ImmutableMap.of("playerName", ffaPlayer.getName()));
         PlayerList.getInstance().remove(event.getPlayer());
     }
 }

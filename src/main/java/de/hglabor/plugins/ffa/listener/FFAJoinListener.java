@@ -22,7 +22,6 @@ public class FFAJoinListener implements Listener {
         Player player = event.getPlayer();
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
         PlayerList.getInstance().add(ffaPlayer);
-        Utils.broadcastMessage("hglabor.ffa.joinMessage", ImmutableMap.of("playerName", player.getName()));
         player.sendTitle(
                 Localization.INSTANCE.getMessage("hglabor.ffa.joinTitle", Utils.getPlayerLocale(player)),
                 Localization.INSTANCE.getMessage("hglabor.ffa.lowerJoinTitle", Utils.getPlayerLocale(player)),
