@@ -26,6 +26,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -67,6 +68,7 @@ public final class Main extends JavaPlugin {
         this.registerCommands();
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             FFAPlayer player = PlayerList.getInstance().getPlayer(onlinePlayer);
+            onlinePlayer.setMetadata("oldKnockback", new FixedMetadataValue(Main.getPlugin(), ""));
             PlayerList.getInstance().add(player);
             ScoreboardFactory.create(player);
             Bukkit.getOnlinePlayers().forEach(newPlayer -> {
@@ -103,6 +105,7 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new Feast(), this);
         pluginManager.registerEvents(new RemoveHitCooldown(), this);
         pluginManager.registerEvents(new LastHitDetection(), this);
+        pluginManager.registerEvents(new OldKnockback(), this);
     }
 
     private void loadLocalizationFiles() {
