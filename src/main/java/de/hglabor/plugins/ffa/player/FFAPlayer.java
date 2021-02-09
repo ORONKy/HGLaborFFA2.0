@@ -3,6 +3,7 @@ package de.hglabor.plugins.ffa.player;
 import de.hglabor.plugins.ffa.util.ScoreboardFactory;
 import de.hglabor.plugins.kitapi.player.KitPlayerImpl;
 import de.hglabor.plugins.kitapi.util.Utils;
+import de.hglabor.utils.noriskutils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
@@ -88,7 +89,7 @@ public class FFAPlayer extends KitPlayerImpl implements ScoreboardFactory.Scoreb
 
     @Override
     public Locale getLocale() {
-        return Utils.getPlayerLocale(uuid);
+        return ChatUtils.getPlayerLocale(uuid);
     }
 
     @Override

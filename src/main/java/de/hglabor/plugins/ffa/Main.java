@@ -22,6 +22,7 @@ import de.hglabor.plugins.kitapi.kit.AbstractKit;
 import de.hglabor.plugins.kitapi.kit.KitManager;
 import de.hglabor.plugins.kitapi.kit.events.KitEventHandlerImpl;
 import de.hglabor.utils.localization.Localization;
+import de.hglabor.utils.noriskutils.feast.FeastListener;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -102,7 +103,7 @@ public final class Main extends JavaPlugin {
         pluginManager.registerEvents(new Tracker(), this);
         pluginManager.registerEvents(new DamageNerf(), this);
         pluginManager.registerEvents(new DurabilityFix(), this);
-        pluginManager.registerEvents(new Feast(), this);
+        pluginManager.registerEvents(new FeastListener(), this);
         pluginManager.registerEvents(new RemoveHitCooldown(), this);
         pluginManager.registerEvents(new LastHitDetection(), this);
         pluginManager.registerEvents(new OldKnockback(), this);

@@ -7,6 +7,7 @@ import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.ScoreboardFactory;
 import de.hglabor.plugins.kitapi.util.Utils;
+import de.hglabor.utils.noriskutils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -23,8 +24,8 @@ public class FFAJoinListener implements Listener {
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
         PlayerList.getInstance().add(ffaPlayer);
         player.sendTitle(
-                Localization.INSTANCE.getMessage("hglabor.ffa.joinTitle", Utils.getPlayerLocale(player)),
-                Localization.INSTANCE.getMessage("hglabor.ffa.lowerJoinTitle", Utils.getPlayerLocale(player)),
+                Localization.INSTANCE.getMessage("hglabor.ffa.joinTitle", ChatUtils.getPlayerLocale(player)),
+                Localization.INSTANCE.getMessage("hglabor.ffa.lowerJoinTitle", ChatUtils.getPlayerLocale(player)),
                 20, 20, 20);
         ScoreboardFactory.create(ffaPlayer);
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> ScoreboardFactory.addPlayerToNoCollision(player, PlayerList.getInstance().getPlayer(onlinePlayer)));

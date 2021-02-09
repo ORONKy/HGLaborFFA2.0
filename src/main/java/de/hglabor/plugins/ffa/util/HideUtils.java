@@ -6,6 +6,7 @@ import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.kitapi.kit.KitManager;
 import de.hglabor.plugins.kitapi.util.Utils;
 import de.hglabor.utils.localization.Localization;
+import de.hglabor.utils.noriskutils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -54,7 +55,7 @@ public final class HideUtils implements Listener {
     }
 
     public void hideToInGamePlayers(Player playerToHide) {
-        bossBars.get(Utils.getPlayerLocale(playerToHide.getUniqueId())).addPlayer(playerToHide);
+        bossBars.get(ChatUtils.getPlayerLocale(playerToHide.getUniqueId())).addPlayer(playerToHide);
         for (FFAPlayer playerInArena : PlayerList.getInstance().getPlayersInArena()) {
             Player player = playerInArena.getPlayer();
             player.hidePlayer(Main.getPlugin(), playerToHide);
@@ -62,7 +63,7 @@ public final class HideUtils implements Listener {
     }
 
     public void makeVisibleToInGamePlayers(Player playerToShow) {
-        bossBars.get(Utils.getPlayerLocale(playerToShow.getUniqueId())).removePlayer(playerToShow);
+        bossBars.get(ChatUtils.getPlayerLocale(playerToShow.getUniqueId())).removePlayer(playerToShow);
         for (FFAPlayer playerInArena : PlayerList.getInstance().getPlayersInArena()) {
             Player player = playerInArena.getPlayer();
             player.showPlayer(Main.getPlugin(), playerToShow);
