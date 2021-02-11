@@ -48,9 +48,9 @@ repositories {
 
 dependencies {
     compile 'org.apache.commons:commons-lang3:3.11'
-    compile 'de.hglabor:kit-api:0.+'
+    compile 'de.hglabor:kit-api:0.1.0'
     compile 'de.hglabor:localization:0.0.+'
-    compile 'de.hglabor:hglabor-utils:0.+'
+    compile 'de.hglabor:hglabor-utils:0.0.4'
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.6.0-SNAPSHOT'
     compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
     compileOnly 'org.bukkit:craftbukkit:1.16.5-R0.1-SNAPSHOT'

@@ -2,6 +2,7 @@ package de.hglabor.plugins.ffa.commands;
 
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
+import de.hglabor.utils.noriskutils.command.AbstractCommand;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;

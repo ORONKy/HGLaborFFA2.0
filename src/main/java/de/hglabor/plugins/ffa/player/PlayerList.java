@@ -1,7 +1,7 @@
 package de.hglabor.plugins.ffa.player;
 
 import de.hglabor.plugins.kitapi.player.KitPlayer;
-import de.hglabor.plugins.kitapi.player.KitPlayerSupplier;
+import de.hglabor.plugins.kitapi.supplier.KitPlayerSupplier;
 import org.bukkit.entity.Player;
 
 import java.util.*;

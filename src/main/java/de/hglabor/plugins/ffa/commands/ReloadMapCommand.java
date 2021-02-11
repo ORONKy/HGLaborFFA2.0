@@ -1,6 +1,7 @@
 package de.hglabor.plugins.ffa.commands;
 
 import de.hglabor.plugins.ffa.Main;
+import de.hglabor.utils.noriskutils.command.AbstractCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;

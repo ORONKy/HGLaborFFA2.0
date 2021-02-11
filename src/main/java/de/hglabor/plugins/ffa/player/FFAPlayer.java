@@ -1,9 +1,7 @@
 package de.hglabor.plugins.ffa.player;
-
-import de.hglabor.plugins.ffa.util.ScoreboardFactory;
-import de.hglabor.plugins.kitapi.player.KitPlayerImpl;
-import de.hglabor.plugins.kitapi.util.Utils;
+import de.hglabor.plugins.kitapi.supplier.KitPlayerImpl;
 import de.hglabor.utils.noriskutils.ChatUtils;
+import de.hglabor.utils.noriskutils.scoreboard.ScoreboardPlayer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.Objective;
@@ -12,7 +10,7 @@ import org.bukkit.scoreboard.Scoreboard;
 import java.util.Locale;
 import java.util.UUID;
 
-public class FFAPlayer extends KitPlayerImpl implements ScoreboardFactory.ScoreboardPlayer {
+public class FFAPlayer extends KitPlayerImpl implements ScoreboardPlayer {
     protected final String name;
     protected int kills;
     protected Status status;
