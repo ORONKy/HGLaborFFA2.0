@@ -42,7 +42,7 @@ public final class ScoreboardManager extends BukkitRunnable {
         for (FFAPlayer ffaPlayer : PlayerList.getInstance().getPlayers()) {
             ScoreboardFactory.updateEntry(ffaPlayer, "playersValue", SPACE() + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers(), "");
             ScoreboardFactory.updateEntry(ffaPlayer, "killsValue", ChatColor.AQUA + "" + ChatColor.BOLD + "Kills: " + ChatColor.RESET + ffaPlayer.getKills(), "");
-            ScoreboardFactory.updateEntry(ffaPlayer, "resetValue", TimeConverter.stringify(Main.getFFARunnable().getTimer()), "");
+            ScoreboardFactory.updateEntry(ffaPlayer, "resetValue", SPACE() + TimeConverter.stringify(Main.getFFARunnable().getTimer()), "");
 
             boolean kitDisabled = ffaPlayer.areKitsDisabled();
 
