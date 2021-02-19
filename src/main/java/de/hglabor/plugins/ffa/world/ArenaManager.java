@@ -126,7 +126,7 @@ public class ArenaManager {
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
         Inventory inventory = player.getInventory();
         inventory.clear();
-        inventory.setItem(0, new ItemBuilder(Material.STONE_SWORD).setUnbreakable().build());
+        inventory.setItem(0, new ItemBuilder(Material.STONE_SWORD).setUnbreakable(true).build());
         inventory.setItem(1, new ItemBuilder(Material.COMPASS).setName("§cTracker").build());
         inventory.setItem(13, new ItemStack(Material.BOWL, 32));
         inventory.setItem(14, new ItemStack(Material.RED_MUSHROOM, 32));

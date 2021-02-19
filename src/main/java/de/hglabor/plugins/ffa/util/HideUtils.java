@@ -4,7 +4,6 @@ import de.hglabor.plugins.ffa.Main;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.kitapi.kit.KitManager;
-import de.hglabor.plugins.kitapi.util.Utils;
 import de.hglabor.utils.localization.Localization;
 import de.hglabor.utils.noriskutils.ChatUtils;
 import org.bukkit.Bukkit;

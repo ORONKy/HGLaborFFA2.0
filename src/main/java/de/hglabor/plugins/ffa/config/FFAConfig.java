@@ -1,7 +1,7 @@
 package de.hglabor.plugins.ffa.config;
 
-import de.hglabor.utils.localization.Localization;
 import de.hglabor.plugins.ffa.Main;
+import de.hglabor.utils.localization.Localization;
 
 import java.util.Locale;
 

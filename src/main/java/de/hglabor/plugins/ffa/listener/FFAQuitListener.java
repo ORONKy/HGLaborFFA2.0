@@ -1,9 +1,7 @@
 package de.hglabor.plugins.ffa.listener;
 
-import com.google.common.collect.ImmutableMap;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
-import de.hglabor.plugins.kitapi.util.Utils;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
