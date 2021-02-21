@@ -1,6 +1,6 @@
 package de.hglabor.plugins.ffa.listener;
 
-import de.hglabor.plugins.ffa.Main;
+import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.ScoreboardManager;
@@ -29,7 +29,7 @@ public class FFAJoinListener implements Listener {
         ScoreboardFactory.create(ffaPlayer);
         ScoreboardManager.setBasicScoreboardLayout(ffaPlayer);
         Bukkit.getOnlinePlayers().forEach(onlinePlayer -> ScoreboardFactory.addPlayerToNoCollision(player, PlayerList.getInstance().getPlayer(onlinePlayer)));
-        Main.getArenaManager().prepareKitSelection(player);
+        FFA.getArenaManager().prepareKitSelection(player);
     }
 }
 

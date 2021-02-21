@@ -1,6 +1,6 @@
 package de.hglabor.plugins.ffa.listener;
 
-import de.hglabor.plugins.ffa.Main;
+import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
@@ -52,7 +52,7 @@ public class FFADeathListener implements Listener {
         world.dropItem(player.getLocation(), new ItemStack(Material.BROWN_MUSHROOM, 16));
         world.dropItem(player.getLocation(), new ItemStack(Material.BOWL, 16));
 
-        Bukkit.getScheduler().runTaskLater(Main.getPlugin(), () -> Main.getArenaManager().prepareKitSelection(player), 0);
+        Bukkit.getScheduler().runTaskLater(FFA.getPlugin(), () -> FFA.getArenaManager().prepareKitSelection(player), 0);
     }
 }
 

@@ -1,6 +1,5 @@
 package de.hglabor.plugins.ffa.kit;
 
-import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.kitapi.kit.events.KitItemHandler;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -12,7 +11,7 @@ import org.bukkit.event.player.PlayerSwapHandItemsEvent;
 
 public class KitItemListener extends KitItemHandler implements Listener {
     public KitItemListener() {
-        super(PlayerList.getInstance());
+        super();
     }
 
     @EventHandler

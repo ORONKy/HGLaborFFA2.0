@@ -1,5 +1,5 @@
 package de.hglabor.plugins.ffa.player;
-import de.hglabor.plugins.kitapi.supplier.KitPlayerImpl;
+import de.hglabor.plugins.kitapi.player.KitPlayerImpl;
 import de.hglabor.utils.noriskutils.ChatUtils;
 import de.hglabor.utils.noriskutils.scoreboard.ScoreboardPlayer;
 import org.bukkit.Bukkit;

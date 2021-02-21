@@ -23,15 +23,14 @@ public class FFARunnable extends BukkitRunnable {
         if (Bukkit.getOnlinePlayers().size() == 0) {
             return;
         }
-        ArenaManager arenaManager = Main.getArenaManager();
+        ArenaManager arenaManager = FFA.getArenaManager();
         timer--;
         if (timer == resetDuration / 2) {
             arenaManager.getFeast().spawn();
         }
         if (timer <= 0) {
             timer = resetDuration;
-            arenaManager.setFeast(new Feast(Main.getPlugin(), world).center(arenaManager.randomSpawn(50)).radius(20).timer(300).material(Material.GRASS_BLOCK))
-            ;
+            arenaManager.setFeast(new Feast(FFA.getPlugin(), world).center(arenaManager.randomSpawn(50)).radius(20).timer(300).material(Material.GRASS_BLOCK));
             arenaManager.reloadMap();
         }
     }

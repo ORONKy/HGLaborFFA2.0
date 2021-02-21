@@ -1,6 +1,6 @@
 package de.hglabor.plugins.ffa.commands;
 
-import de.hglabor.plugins.ffa.Main;
+import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.utils.noriskutils.command.AbstractCommand;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -14,7 +14,7 @@ public class ReloadMapCommand extends AbstractCommand {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (super.onCommand(sender, command, label, args)) {
-            Main.getArenaManager().reloadMap();
+            FFA.getArenaManager().reloadMap();
             sender.sendMessage(ChatColor.GREEN + "" + ChatColor.BOLD + "Reloaded Map");
             return true;
         }

@@ -1,11 +1,11 @@
 package de.hglabor.plugins.ffa.kit;
 
 
-import de.hglabor.plugins.ffa.Main;
+import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
+import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
-import de.hglabor.plugins.kitapi.kit.KitManager;
 import de.hglabor.plugins.kitapi.kit.kits.NoneKit;
 import de.hglabor.plugins.kitapi.kit.selector.KitSelector;
 import org.bukkit.Sound;
@@ -47,7 +47,7 @@ public class KitSelectorFFA extends KitSelector implements Listener {
             return;
         }
 
-        if (inventoryTitle.contains(kitSelectorTitle)) {
+        if (inventoryTitle.contains(KIT_SELECTOR_TITLE)) {
             event.setCancelled(true);
             if (nextPage(inventoryTitle, clickedItem, player)) {
                 return;
@@ -56,7 +56,7 @@ public class KitSelectorFFA extends KitSelector implements Listener {
                 return;
             }
             ItemStack kitSelector = getKitSelectorInHand(player);
-            AbstractKit kit = KitManager.getInstance().byItem(clickedItem);
+            AbstractKit kit = KitApi.getInstance().byItem(clickedItem);
             if (kitSelector != null && isKitSelectorItem(kitSelector)) {
                 int index = Integer.parseInt(kitSelector.getItemMeta().getDisplayName().substring(kitSelector.getItemMeta().getDisplayName().length() - 1)) - 1;
                 FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
@@ -65,7 +65,7 @@ public class KitSelectorFFA extends KitSelector implements Listener {
                 //TODO: player.sendMessage(Localization.getMessage("kitSelection.pickMessage", ImmutableMap.of("kitName", kit.getName()), ffaPlayer.getLocale()));
                 player.closeInventory();
                 if (ffaPlayer.getKits().stream().noneMatch(kits -> kits.equals(NoneKit.getInstance()))) {
-                    Main.getArenaManager().teleportToArena(player);
+                    FFA.getArenaManager().teleportToArena(player);
                 }
             }
         }

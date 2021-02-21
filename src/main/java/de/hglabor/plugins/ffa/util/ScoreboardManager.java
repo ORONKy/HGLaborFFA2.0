@@ -1,6 +1,6 @@
 package de.hglabor.plugins.ffa.util;
 
-import de.hglabor.plugins.ffa.Main;
+import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.kitapi.config.KitApiConfig;
@@ -21,7 +21,7 @@ public final class ScoreboardManager extends BukkitRunnable {
         int lowestPosition = 7;
         int highestPosition = lowestPosition + kitAmount;
         ScoreboardFactory.addEntry(scoreboardPlayer, "reset", Localization.INSTANCE.getMessage("scoreboard.mapReset", scoreboardPlayer.getLocale()), "", highestPosition + 3);
-        ScoreboardFactory.addEntry(scoreboardPlayer, "resetValue", TimeConverter.stringify(Main.getFFARunnable().getTimer()), "", highestPosition + 2);
+        ScoreboardFactory.addEntry(scoreboardPlayer, "resetValue", TimeConverter.stringify(FFA.getFFARunnable().getTimer()), "", highestPosition + 2);
         ScoreboardFactory.addEntry(scoreboardPlayer, String.valueOf(highestPosition + 1), "", "", highestPosition + 1);
         if (kitAmount == 1) {
             ScoreboardFactory.addEntry(scoreboardPlayer, "kitValue" + 1, "Kit: None", "", highestPosition);
@@ -42,7 +42,7 @@ public final class ScoreboardManager extends BukkitRunnable {
         for (FFAPlayer ffaPlayer : PlayerList.getInstance().getPlayers()) {
             ScoreboardFactory.updateEntry(ffaPlayer, "playersValue", SPACE() + Bukkit.getOnlinePlayers().size() + "/" + Bukkit.getMaxPlayers(), "");
             ScoreboardFactory.updateEntry(ffaPlayer, "killsValue", ChatColor.AQUA + "" + ChatColor.BOLD + "Kills: " + ChatColor.RESET + ffaPlayer.getKills(), "");
-            ScoreboardFactory.updateEntry(ffaPlayer, "resetValue", SPACE() + TimeConverter.stringify(Main.getFFARunnable().getTimer()), "");
+            ScoreboardFactory.updateEntry(ffaPlayer, "resetValue", SPACE() + TimeConverter.stringify(FFA.getFFARunnable().getTimer()), "");
 
             boolean kitDisabled = ffaPlayer.areKitsDisabled();
 

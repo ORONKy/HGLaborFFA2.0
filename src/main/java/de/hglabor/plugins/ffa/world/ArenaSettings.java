@@ -2,8 +2,6 @@ package de.hglabor.plugins.ffa.world;
 
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
-import de.hglabor.plugins.kitapi.kit.KitManager;
-import de.hglabor.plugins.kitapi.player.KitPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -72,8 +70,8 @@ public class ArenaSettings implements Listener {
     @EventHandler
     public void cancelEntityTargetInValidPlayer(EntityTargetLivingEntityEvent event) {
         if (!(event.getTarget() instanceof Player)) return;
-        KitPlayer kitPlayer = KitManager.getInstance().getPlayer((Player) event.getTarget());
-        if (!kitPlayer.isValid()) {
+        FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer((Player) event.getTarget());
+        if (!ffaPlayer.isValid()) {
             event.setCancelled(true);
         }
     }

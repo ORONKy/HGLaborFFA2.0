@@ -1,6 +1,6 @@
 name: HGLaborFFA2.0
-version: ${project.version}
-main: de.hglabor.plugins.ffa.Main
+version: @version@
+main: de.hglabor.plugins.ffa.FFA
 api-version: 1.16
 prefix: HGLaborFFA
 authors: [ NoRisk ]

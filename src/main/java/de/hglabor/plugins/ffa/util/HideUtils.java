@@ -1,9 +1,9 @@
 package de.hglabor.plugins.ffa.util;
 
-import de.hglabor.plugins.ffa.Main;
+import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
-import de.hglabor.plugins.kitapi.kit.KitManager;
+import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.utils.localization.Localization;
 import de.hglabor.utils.noriskutils.ChatUtils;
 import org.bukkit.Bukkit;
@@ -22,7 +22,7 @@ public final class HideUtils implements Listener {
     private final Map<Locale, BossBar> bossBars = new HashMap<>();
 
     private HideUtils() {
-        for (Locale supportedLanguage : KitManager.getInstance().getSupportedLanguages()) {
+        for (Locale supportedLanguage : KitApi.getInstance().getSupportedLanguages()) {
             bossBars.put(supportedLanguage, Bukkit.createBossBar(Localization.INSTANCE.getMessage("bossBar.hideUtils", supportedLanguage), BarColor.RED, BarStyle.SOLID));
         }
     }
@@ -36,7 +36,7 @@ public final class HideUtils implements Listener {
             for (FFAPlayer playerInKitSelection : PlayerList.getInstance().getPlayersInKitSelection()) {
                 Player playerToHide = playerInKitSelection.getPlayer();
                 if (playerToHide != null) {
-                    player.hidePlayer(Main.getPlugin(), playerToHide);
+                    player.hidePlayer(FFA.getPlugin(), playerToHide);
                 }
             }
         }
@@ -47,7 +47,7 @@ public final class HideUtils implements Listener {
             for (FFAPlayer playerInKitSelection : PlayerList.getInstance().getPlayersInKitSelection()) {
                 Player playerToShow = playerInKitSelection.getPlayer();
                 if (playerToShow != null) {
-                    player.showPlayer(Main.getPlugin(), playerToShow);
+                    player.showPlayer(FFA.getPlugin(), playerToShow);
                 }
             }
         }
@@ -57,7 +57,7 @@ public final class HideUtils implements Listener {
         bossBars.get(ChatUtils.getPlayerLocale(playerToHide.getUniqueId())).addPlayer(playerToHide);
         for (FFAPlayer playerInArena : PlayerList.getInstance().getPlayersInArena()) {
             Player player = playerInArena.getPlayer();
-            player.hidePlayer(Main.getPlugin(), playerToHide);
+            player.hidePlayer(FFA.getPlugin(), playerToHide);
         }
     }
 
@@ -65,7 +65,7 @@ public final class HideUtils implements Listener {
         bossBars.get(ChatUtils.getPlayerLocale(playerToShow.getUniqueId())).removePlayer(playerToShow);
         for (FFAPlayer playerInArena : PlayerList.getInstance().getPlayersInArena()) {
             Player player = playerInArena.getPlayer();
-            player.showPlayer(Main.getPlugin(), playerToShow);
+            player.showPlayer(FFA.getPlugin(), playerToShow);
         }
     }
 

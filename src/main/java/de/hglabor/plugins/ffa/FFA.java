@@ -15,7 +15,7 @@ import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.ScoreboardManager;
 import de.hglabor.plugins.ffa.world.ArenaManager;
 import de.hglabor.plugins.ffa.world.ArenaSettings;
-import de.hglabor.plugins.kitapi.kit.KitManager;
+import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.plugins.kitapi.kit.events.KitEventHandlerImpl;
 import de.hglabor.plugins.kitapi.listener.LastHitDetection;
 import de.hglabor.utils.localization.Localization;
@@ -28,15 +28,14 @@ import de.hglabor.utils.noriskutils.scoreboard.ScoreboardFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
-import org.bukkit.event.Listener;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.nio.file.Paths;
 
-public final class Main extends JavaPlugin {
-    private static Main plugin;
+public final class FFA extends JavaPlugin {
+    private static FFA plugin;
     private static ArenaManager arenaManager;
     private static FFARunnable ffaRunnable;
 
@@ -48,7 +47,7 @@ public final class Main extends JavaPlugin {
         return arenaManager;
     }
 
-    public static Main getPlugin() {
+    public static FFA getPlugin() {
         return plugin;
     }
 
@@ -56,7 +55,7 @@ public final class Main extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         this.loadLocalizationFiles();
-        KitManager.getInstance().register(PlayerList.getInstance(), this);
+        KitApi.getInstance().register(PlayerList.getInstance(), KitSelectorFFA.getInstance(), this);
         FFAConfig.load();
         World world = Bukkit.getWorld("world");
         arenaManager = new ArenaManager(world, FFAConfig.getInteger("ffa.size"));
@@ -64,13 +63,12 @@ public final class Main extends JavaPlugin {
         ffaRunnable.runTaskTimer(this, 0, 20);
         ScoreboardManager scoreboardManager = new ScoreboardManager();
         scoreboardManager.runTaskTimer(this, 0, 20);
-        KitSelectorFFA.getInstance().register();
 
         this.registerListeners();
         this.registerCommands();
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
             FFAPlayer player = PlayerList.getInstance().getPlayer(onlinePlayer);
-            onlinePlayer.setMetadata("oldKnockback", new FixedMetadataValue(Main.getPlugin(), ""));
+            onlinePlayer.setMetadata("oldKnockback", new FixedMetadataValue(FFA.getPlugin(), ""));
             PlayerList.getInstance().add(player);
             ScoreboardFactory.create(player);
             Bukkit.getOnlinePlayers().forEach(newPlayer -> {
@@ -87,12 +85,8 @@ public final class Main extends JavaPlugin {
     private void registerListeners() {
         PluginManager pluginManager = Bukkit.getPluginManager();
         pluginManager.registerEvents(KitSelectorFFA.getInstance(), this);
-        KitManager.getInstance().getEnabledKits()
-                .stream()
-                .filter(enabledKit -> enabledKit instanceof Listener)
-                .forEach(enabledKit -> pluginManager.registerEvents((Listener) enabledKit, this));
         pluginManager.registerEvents(new ArenaSettings(), this);
-        pluginManager.registerEvents(new KitEventHandlerImpl(PlayerList.getInstance()), this);
+        pluginManager.registerEvents(new KitEventHandlerImpl(), this);
         pluginManager.registerEvents(new KitItemListener(), this);
         pluginManager.registerEvents(new FFAJoinListener(), this);
         pluginManager.registerEvents(new FFAQuitListener(), this);
@@ -110,7 +104,7 @@ public final class Main extends JavaPlugin {
 
     private void loadLocalizationFiles() {
         try {
-            Localization.INSTANCE.loadLanguageFiles(Paths.get(Main.getPlugin().getDataFolder() + "/lang"), "§");
+            Localization.INSTANCE.loadLanguageFiles(Paths.get(FFA.getPlugin().getDataFolder() + "/lang"), "§");
         } catch (Exception e) {
             e.printStackTrace();
         }
