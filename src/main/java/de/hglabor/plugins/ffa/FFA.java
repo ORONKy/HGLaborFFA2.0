@@ -10,6 +10,7 @@ import de.hglabor.plugins.ffa.kit.KitSelectorFFA;
 import de.hglabor.plugins.ffa.listener.FFADeathListener;
 import de.hglabor.plugins.ffa.listener.FFAJoinListener;
 import de.hglabor.plugins.ffa.listener.FFAQuitListener;
+import de.hglabor.plugins.ffa.listener.TestListener;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.ScoreboardManager;
@@ -94,12 +95,13 @@ public final class FFA extends JavaPlugin {
         //mechanics
         pluginManager.registerEvents(new SoupHealing(), this);
         pluginManager.registerEvents(new Tracker(), this);
-        pluginManager.registerEvents(new DamageNerf(), this);
+        pluginManager.registerEvents(new DamageNerf(FFAConfig.getDouble("damage.sword.nerf"),FFAConfig.getDouble("damage.other.nerf")), this);
         pluginManager.registerEvents(new DurabilityFix(), this);
         pluginManager.registerEvents(new FeastListener(), this);
         pluginManager.registerEvents(new RemoveHitCooldown(), this);
         pluginManager.registerEvents(new LastHitDetection(), this);
         pluginManager.registerEvents(new OldKnockback(this), this);
+        pluginManager.registerEvents(new TestListener(), this);
     }
 
     private void loadLocalizationFiles() {
