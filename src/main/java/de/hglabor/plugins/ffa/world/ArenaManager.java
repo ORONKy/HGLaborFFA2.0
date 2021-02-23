@@ -53,7 +53,7 @@ public class ArenaManager {
         this.skyBorder.runTaskTimer(FFA.getPlugin(), 0, 20);
         this.center = new Location(world, 0, 0, 0);
         this.schematic = new File(FFA.getPlugin().getDataFolder().getAbsolutePath() + "/arena.schem");
-        this.feast = new Feast(FFA.getPlugin(), world).center(randomSpawn(50)).radius(20).timer(300).material(Material.GRASS_BLOCK);
+        this.feast = new Feast(FFA.getPlugin(), world).center(randomSpawn(50)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK);
         this.world.setTime(1000);
         this.world.setWeatherDuration(0);
         this.world.setThundering(false);
