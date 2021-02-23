@@ -57,7 +57,7 @@ public class KitSelectorFFA extends KitSelector implements Listener {
             }
             ItemStack kitSelector = getKitSelectorInHand(player);
             AbstractKit kit = KitApi.getInstance().byItem(clickedItem);
-            if (kitSelector != null && isKitSelectorItem(kitSelector)) {
+            if (kitSelector != null && isKitSelectorItem(kitSelector) && kit != null) {
                 int index = Integer.parseInt(kitSelector.getItemMeta().getDisplayName().substring(kitSelector.getItemMeta().getDisplayName().length() - 1)) - 1;
                 FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
                 ffaPlayer.setKit(kit, index);
