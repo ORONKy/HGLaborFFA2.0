@@ -8,6 +8,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
+import org.bukkit.event.player.PlayerInteractEntityEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 
 public class ArenaSettings implements Listener {
 
@@ -62,6 +64,23 @@ public class ArenaSettings implements Listener {
     @EventHandler
     public void cancelFoodLoose(FoodLevelChangeEvent event) {
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer((Player) event.getEntity());
+        if (ffaPlayer.isInKitSelection()) {
+            event.setCancelled(true);
+        }
+    }
+
+    @EventHandler
+    public void onPlayerInteractEvent(PlayerInteractEvent event) {
+        FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(event.getPlayer());
+        if (ffaPlayer.isInKitSelection()) {
+            event.setCancelled(true);
+        }
+    }
+
+
+    @EventHandler
+    public void onPlayerInteractEntityEvent(PlayerInteractEntityEvent event) {
+        FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(event.getPlayer());
         if (ffaPlayer.isInKitSelection()) {
             event.setCancelled(true);
         }
