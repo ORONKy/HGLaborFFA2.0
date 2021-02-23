@@ -6,6 +6,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.*;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.hanging.HangingBreakEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
@@ -91,6 +93,16 @@ public class ArenaSettings implements Listener {
     public void onVehicleDamageEvent(VehicleDamageEvent event) {
         if (!(event.getAttacker() instanceof Player)) return;
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer((Player) event.getAttacker());
+        if (ffaPlayer.isInKitSelection()) {
+            event.setCancelled(true);
+        }
+    }
+
+
+    @EventHandler
+    public void onVehicleDamageEvent(HangingBreakByEntityEvent event) {
+        if (!(event.getRemover() instanceof Player)) return;
+        FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer((Player) event.getRemover());
         if (ffaPlayer.isInKitSelection()) {
             event.setCancelled(true);
         }
