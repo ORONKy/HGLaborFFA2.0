@@ -10,6 +10,7 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerDropItemEvent;
 import org.bukkit.event.player.PlayerInteractEntityEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.event.vehicle.VehicleDamageEvent;
 
 public class ArenaSettings implements Listener {
 
@@ -85,6 +86,16 @@ public class ArenaSettings implements Listener {
             event.setCancelled(true);
         }
     }
+
+    @EventHandler
+    public void onVehicleDamageEvent(VehicleDamageEvent event) {
+        if (!(event.getAttacker() instanceof Player)) return;
+        FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer((Player) event.getAttacker());
+        if (ffaPlayer.isInKitSelection()) {
+            event.setCancelled(true);
+        }
+    }
+
 
     @EventHandler
     public void cancelEntityTargetInValidPlayer(EntityTargetLivingEntityEvent event) {
