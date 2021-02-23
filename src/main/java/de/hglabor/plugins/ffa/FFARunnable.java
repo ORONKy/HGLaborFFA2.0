@@ -7,13 +7,15 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class FFARunnable extends BukkitRunnable {
     private final int resetDuration;
     private final World world;
-    private int timer;
+    private final AtomicInteger timer;
 
     public FFARunnable(World world, int resetDuration) {
-        this.timer = resetDuration;
+        this.timer = new AtomicInteger(resetDuration);
         this.resetDuration = resetDuration;
         this.world = world;
     }
@@ -24,19 +26,18 @@ public class FFARunnable extends BukkitRunnable {
             return;
         }
         ArenaManager arenaManager = FFA.getArenaManager();
-        timer--;
-        if (timer == resetDuration / 2) {
+        if (timer.getAndDecrement() == resetDuration / 2) {
             arenaManager.getFeast().spawn();
         }
-        if (timer <= 0) {
-            timer = resetDuration;
+        if (timer.get() <= 0) {
+            timer.set(resetDuration);
             arenaManager.setFeast(new Feast(FFA.getPlugin(), world).center(arenaManager.randomSpawn(50)).radius(20).timer(300).material(Material.GRASS_BLOCK));
             arenaManager.reloadMap();
         }
     }
 
     public int getTimer() {
-        return timer;
+        return timer.get();
     }
 }
 
