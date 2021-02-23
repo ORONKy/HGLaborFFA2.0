@@ -7,6 +7,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.Calendar;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class FFARunnable extends BukkitRunnable {
@@ -22,6 +23,9 @@ public class FFARunnable extends BukkitRunnable {
 
     @Override
     public void run() {
+        if (isRestartTime()) {
+            Bukkit.dispatchCommand(Bukkit.getConsoleSender(), "restart");
+        }
         if (Bukkit.getOnlinePlayers().size() == 0) {
             return;
         }
@@ -34,6 +38,12 @@ public class FFARunnable extends BukkitRunnable {
             arenaManager.setFeast(new Feast(FFA.getPlugin(), world).center(arenaManager.randomSpawn(50)).radius(20).timer(300).material(Material.GRASS_BLOCK));
             arenaManager.reloadMap();
         }
+    }
+
+    private boolean isRestartTime() {
+        int currentHour = Calendar.getInstance().get(Calendar.HOUR_OF_DAY);
+        int currentMinut = Calendar.getInstance().get(Calendar.MINUTE);
+        return currentHour == 3 && currentMinut == 0;
     }
 
     public int getTimer() {
