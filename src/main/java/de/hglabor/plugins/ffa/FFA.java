@@ -18,6 +18,7 @@ import de.hglabor.plugins.ffa.world.ArenaManager;
 import de.hglabor.plugins.ffa.world.ArenaSettings;
 import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.plugins.kitapi.kit.events.KitEventHandlerImpl;
+import de.hglabor.plugins.kitapi.listener.InventoryDetection;
 import de.hglabor.plugins.kitapi.listener.LastHitDetection;
 import de.hglabor.utils.localization.Localization;
 import de.hglabor.utils.noriskutils.feast.FeastListener;
@@ -100,6 +101,7 @@ public final class FFA extends JavaPlugin {
         pluginManager.registerEvents(new FeastListener(), this);
         pluginManager.registerEvents(new RemoveHitCooldown(), this);
         pluginManager.registerEvents(new LastHitDetection(), this);
+        pluginManager.registerEvents(new InventoryDetection(), this);
         pluginManager.registerEvents(new OldKnockback(this), this);
         pluginManager.registerEvents(new TestListener(), this);
     }
