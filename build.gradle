@@ -59,7 +59,7 @@ dependencies {
 }
 
 group = 'de.hglabor'
-version = '0.0.1'
+version = '0.0.2'
 description = 'FFA Warp for HGLabor'
 
 sourceCompatibility = targetCompatibility = JavaVersion.VERSION_11
