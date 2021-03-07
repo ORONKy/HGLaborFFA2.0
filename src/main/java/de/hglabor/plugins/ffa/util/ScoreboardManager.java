@@ -51,11 +51,11 @@ public final class ScoreboardManager extends BukkitRunnable {
                 int index = 1;
                 for (AbstractKit kit : ffaPlayer.getKits()) {
                     if (kit.equals(CopyCatKit.INSTANCE)) {
-                        AbstractKit copiedKit = ffaPlayer.getKitAttribute(CopyCatKit.INSTANCE);
+                        AbstractKit copiedKit = ffaPlayer.getKitAttribute(CopyCatKit.INSTANCE.getKitAttributeKey());
                         ScoreboardFactory.updateEntry(ffaPlayer,
                                 "kitValue" + index, ChatColor.BLUE + "" + ChatColor.BOLD + "Kit" + (index == 1 ? "" : index) + ": " + ChatColor.RESET +
                                         (kitDisabled ? ChatColor.STRIKETHROUGH : ChatColor.RESET) + kit.getName() +
-                                        "(" + (copiedKit != null ? ((AbstractKit) ffaPlayer.getKitAttribute(CopyCatKit.INSTANCE)).getName() : "None") + ")", "");
+                                        "(" + (copiedKit != null ? ((AbstractKit) ffaPlayer.getKitAttribute(CopyCatKit.INSTANCE.getKitAttributeKey())).getName() : "None") + ")", "");
                     } else {
                         ScoreboardFactory.updateEntry(ffaPlayer, "kitValue" + index, ChatColor.BLUE + "" + ChatColor.BOLD + "Kit" + (KitApiConfig.getInstance().getInteger("kit.amount") == 1 ? "" : index) + ": " + ChatColor.RESET + (kitDisabled ? ChatColor.STRIKETHROUGH : ChatColor.RESET) + kit.getName(), "");
                     }

@@ -13,7 +13,6 @@ import com.sk89q.worldedit.regions.CuboidRegion;
 import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.config.FFAConfig;
 import de.hglabor.plugins.ffa.gamemechanics.SkyBorder;
-import de.hglabor.plugins.ffa.kit.KitSelectorFFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.HideUtils;
@@ -104,7 +103,7 @@ public class ArenaManager {
         player.closeInventory();
         player.getInventory().clear();
 
-        KitSelectorFFA.getInstance().getKitSelectorItems().forEach(kitSelector -> player.getInventory().addItem(kitSelector));
+        KitApi.getInstance().getKitSelector().getKitSelectorItems().forEach(kitSelector -> player.getInventory().addItem(kitSelector));
 
         Location location = randomSpawn(40).clone().add(0, 20, 0);
         player.teleport(location);
