@@ -11,26 +11,20 @@ import de.hglabor.plugins.kitapi.kit.selector.KitSelector;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class KitSelectorFFA extends KitSelector implements Listener {
-    private final static KitSelectorFFA instance = new KitSelectorFFA();
-
-    private KitSelectorFFA() {
-        super();
-    }
-
-    public static KitSelectorFFA getInstance() {
-        return instance;
-    }
+public class KitSelectorFFA extends KitSelector {
 
     @EventHandler
     public void onKitSelectorClick(PlayerInteractEvent event) {
         if (event.getItem() != null && isKitSelectorItem(event.getItem())) {
             FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(event.getPlayer());
+            //TODO InventoryClickEvent fires PlayerInteractEvent lol
+            if (event.getPlayer().getOpenInventory().getTitle().contains(KIT_SELECTOR_TITLE)) {
+                return;
+            }
             if (ffaPlayer.isInKitSelection()) {
                 openFirstPage(event.getPlayer());
             }
