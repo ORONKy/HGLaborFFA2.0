@@ -17,6 +17,7 @@ import de.hglabor.plugins.ffa.util.ScoreboardManager;
 import de.hglabor.plugins.ffa.world.ArenaManager;
 import de.hglabor.plugins.ffa.world.ArenaSettings;
 import de.hglabor.plugins.kitapi.KitApi;
+import de.hglabor.plugins.kitapi.command.KitSettingsCommand;
 import de.hglabor.plugins.kitapi.kit.events.KitEventHandlerImpl;
 import de.hglabor.plugins.kitapi.listener.InventoryDetection;
 import de.hglabor.plugins.kitapi.listener.LastHitDetection;
@@ -27,6 +28,7 @@ import de.hglabor.utils.noriskutils.listener.DurabilityFix;
 import de.hglabor.utils.noriskutils.listener.OldKnockback;
 import de.hglabor.utils.noriskutils.listener.RemoveHitCooldown;
 import de.hglabor.utils.noriskutils.scoreboard.ScoreboardFactory;
+import dev.jorel.commandapi.CommandAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
@@ -55,10 +57,7 @@ public final class FFA extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        plugin = this;
-        this.loadLocalizationFiles();
-        KitApi.getInstance().register(PlayerList.getInstance(), KitSelectorFFA.getInstance(), this);
-        FFAConfig.load();
+        KitApi.getInstance().register(PlayerList.getInstance(), new KitSelectorFFA(), this);
         World world = Bukkit.getWorld("world");
         arenaManager = new ArenaManager(world, FFAConfig.getInteger("ffa.size"));
         ffaRunnable = new FFARunnable(world, FFAConfig.getInteger("ffa.duration"));
@@ -66,6 +65,7 @@ public final class FFA extends JavaPlugin {
         ScoreboardManager scoreboardManager = new ScoreboardManager();
         scoreboardManager.runTaskTimer(this, 0, 20);
 
+        CommandAPI.onEnable(this);
         this.registerListeners();
         this.registerCommands();
         for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
@@ -81,12 +81,19 @@ public final class FFA extends JavaPlugin {
     }
 
     @Override
+    public void onLoad() {
+        plugin = this;
+        loadLocalizationFiles();
+        FFAConfig.load();
+        CommandAPI.onLoad(true);
+    }
+
+    @Override
     public void onDisable() {
     }
 
     private void registerListeners() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(KitSelectorFFA.getInstance(), this);
         pluginManager.registerEvents(new ArenaSettings(), this);
         pluginManager.registerEvents(new KitEventHandlerImpl(), this);
         pluginManager.registerEvents(new KitItemListener(), this);
@@ -117,5 +124,6 @@ public final class FFA extends JavaPlugin {
     private void registerCommands() {
         this.getCommand("suicide").setExecutor(new SuicideCommand());
         this.getCommand("reloadmap").setExecutor(new ReloadMapCommand());
+        new KitSettingsCommand(false);
     }
 }
