@@ -51,8 +51,8 @@ repositories {
 }
 
 dependencies {
+    compile 'de.hglabor:kit-api:0.2.0'
     compile 'org.apache.commons:commons-lang3:3.11'
-    compile 'de.hglabor:kit-api:0.1.1'
     compile 'de.hglabor:localization:0.0.+'
     compile 'de.hglabor:hglabor-utils:0.0.4'
     compile 'dev.jorel:commandapi-shade:5.8'
