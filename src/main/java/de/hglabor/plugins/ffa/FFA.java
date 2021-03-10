@@ -10,7 +10,6 @@ import de.hglabor.plugins.ffa.kit.KitSelectorImpl;
 import de.hglabor.plugins.ffa.listener.FFADeathListener;
 import de.hglabor.plugins.ffa.listener.FFAJoinListener;
 import de.hglabor.plugins.ffa.listener.FFAQuitListener;
-import de.hglabor.plugins.ffa.listener.TestListener;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.ScoreboardManager;
@@ -110,7 +109,6 @@ public final class FFA extends JavaPlugin {
         pluginManager.registerEvents(new LastHitDetection(), this);
         pluginManager.registerEvents(new InventoryDetection(), this);
         pluginManager.registerEvents(new OldKnockback(this), this);
-        pluginManager.registerEvents(new TestListener(), this);
     }
 
     private void loadLocalizationFiles() {
