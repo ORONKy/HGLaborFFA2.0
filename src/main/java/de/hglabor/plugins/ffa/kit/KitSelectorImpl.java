@@ -15,13 +15,13 @@ import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-public class KitSelectorFFA extends KitSelector {
+public class KitSelectorImpl extends KitSelector {
 
     @EventHandler
     public void onKitSelectorClick(PlayerInteractEvent event) {
         if (event.getItem() != null && isKitSelectorItem(event.getItem())) {
             FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(event.getPlayer());
-            //TODO InventoryClickEvent fires PlayerInteractEvent lol
+            //InventoryClickEvent fires PlayerInteractEvent lol
             if (event.getPlayer().getOpenInventory().getTitle().contains(KIT_SELECTOR_TITLE)) {
                 return;
             }

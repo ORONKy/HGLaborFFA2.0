@@ -6,7 +6,7 @@ import de.hglabor.plugins.ffa.config.FFAConfig;
 import de.hglabor.plugins.ffa.gamemechanics.SoupHealing;
 import de.hglabor.plugins.ffa.gamemechanics.Tracker;
 import de.hglabor.plugins.ffa.kit.KitItemListener;
-import de.hglabor.plugins.ffa.kit.KitSelectorFFA;
+import de.hglabor.plugins.ffa.kit.KitSelectorImpl;
 import de.hglabor.plugins.ffa.listener.FFADeathListener;
 import de.hglabor.plugins.ffa.listener.FFAJoinListener;
 import de.hglabor.plugins.ffa.listener.FFAQuitListener;
@@ -57,7 +57,7 @@ public final class FFA extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        KitApi.getInstance().register(PlayerList.getInstance(), new KitSelectorFFA(), this);
+        KitApi.getInstance().register(PlayerList.getInstance(), new KitSelectorImpl(), this);
         World world = Bukkit.getWorld("world");
         arenaManager = new ArenaManager(world, FFAConfig.getInteger("ffa.size"));
         ffaRunnable = new FFARunnable(world, FFAConfig.getInteger("ffa.duration"));
