@@ -58,7 +58,7 @@ public class KitSelectorImpl extends KitSelector {
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
                 //TODO: player.sendMessage(Localization.getMessage("kitSelection.pickMessage", ImmutableMap.of("kitName", kit.getName()), ffaPlayer.getLocale()));
                 player.closeInventory();
-                if (ffaPlayer.getKits().stream().noneMatch(kits -> kits.equals(NoneKit.getInstance()))) {
+                if (ffaPlayer.getKits().stream().noneMatch(kits -> kits.equals(NoneKit.INSTANCE))) {
                     FFA.getArenaManager().teleportToArena(player);
                 }
             }
