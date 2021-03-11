@@ -6,13 +6,6 @@ plugins {
     id "com.github.johnrengelman.shadow" version "6.1.0"
 }
 
-ext.localProps = new Properties()
-try {
-    localProps.load(file("local.properties").newReader())
-} catch (Exception ignored) {
-    // scheiß drauf groovy ist kacke
-}
-
 repositories {
     mavenCentral()
     mavenLocal()
@@ -23,27 +16,6 @@ repositories {
     maven {url = uri('http://repo.md-5.net/content/groups/public/')}
     maven { url "https://jitpack.io/" }
     maven {url = uri('https://repo.maven.apache.org/maven2/')}
-    maven {
-        credentials {
-            username = localProps["gpr.user"] ?: System.getenv("USERNAME")
-            password = localProps["gpr.key"] ?: System.getenv("TOKEN")
-        }
-        url 'https://maven.pkg.github.com/HGLabor/Localization'
-    }
-    maven {
-        credentials {
-            username = localProps["gpr.user"] ?: System.getenv("USERNAME")
-            password = localProps["gpr.key"] ?: System.getenv("TOKEN")
-        }
-        url 'https://maven.pkg.github.com/HGLabor/HGLaborKitAPI2.0'
-    }
-    maven {
-        credentials {
-            username = localProps["gpr.user"] ?: System.getenv("USERNAME")
-            password = localProps["gpr.key"] ?: System.getenv("TOKEN")
-        }
-        url 'https://maven.pkg.github.com/HGLabor/HGLaborUtils'
-    }
     // COMMAND API
     maven { url = "https://raw.githubusercontent.com/JorelAli/CommandAPI/mvn-repo/" }
     maven { url = "https://repo.codemc.org/repository/maven-public/" }
@@ -53,7 +25,7 @@ repositories {
 dependencies {
     compile 'de.hglabor:kit-api:0.2.0'
     compile 'org.apache.commons:commons-lang3:3.11'
-    compile 'de.hglabor:localization:0.0.+'
+    compile 'de.hglabor:localization:0.0.5'
     compile 'de.hglabor:hglabor-utils:0.0.4'
     compile 'dev.jorel:commandapi-shade:5.8'
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.6.0-SNAPSHOT'
