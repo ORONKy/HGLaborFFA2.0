@@ -9,6 +9,7 @@ import org.bukkit.Material;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
+import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
@@ -19,8 +20,9 @@ import java.util.function.Consumer;
 
 public class FFADeathListener implements Listener {
 
-    @EventHandler
+    @EventHandler(priority = EventPriority.MONITOR)
     public void onPlayerDeath(PlayerDeathEvent event) {
+        if (event.isCancelled()) return;
         event.setCancelled(true);
         Player player = event.getEntity();
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);

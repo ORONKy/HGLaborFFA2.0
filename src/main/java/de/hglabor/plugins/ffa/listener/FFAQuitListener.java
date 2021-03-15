@@ -12,7 +12,7 @@ public class FFAQuitListener implements Listener {
     public void onQuit(PlayerQuitEvent event) {
         event.setQuitMessage(null);
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(event.getPlayer());
-        ffaPlayer.getKits().forEach(kit -> kit.disable(ffaPlayer));
+        ffaPlayer.getKits().forEach(kit -> kit.onDisable(ffaPlayer));
         if (ffaPlayer.isInCombat()) {
             event.getPlayer().setHealth(0);
         }

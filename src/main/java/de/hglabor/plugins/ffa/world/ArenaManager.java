@@ -35,6 +35,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Arrays;
 import java.util.Random;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.IntStream;
 
 public class ArenaManager {
@@ -64,6 +65,7 @@ public class ArenaManager {
         this.world.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
         this.world.setGameRule(GameRule.ANNOUNCE_ADVANCEMENTS, false);
         this.world.setGameRule(GameRule.SPAWN_RADIUS, 0);
+        this.world.setGameRule(GameRule.DO_LIMITED_CRAFTING, true);
         this.world.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false);
         this.copyMap();
     }
@@ -75,7 +77,7 @@ public class ArenaManager {
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
 
         ffaPlayer.setStatus(FFAPlayer.Status.KITSELECTION);
-        ffaPlayer.getKits().forEach(kit -> kit.disable(ffaPlayer));
+        ffaPlayer.getKits().forEach(kit -> kit.onDisable(ffaPlayer));
         ffaPlayer.setKills(0);
         ffaPlayer.setKits(KitApi.getInstance().emptyKitList());
         //ffaPlayer.stopCombatTimer();
@@ -85,7 +87,7 @@ public class ArenaManager {
         HideUtils.getInstance().showPlayersInKitSelection(player);
 
         player.setMaxHealth(20);
-        player.setHealth(player.getMaxHealth());
+        player.setHealth(20);
         player.setFoodLevel(20);
         player.setLevel(0);
         player.setFireTicks(0);
@@ -95,6 +97,7 @@ public class ArenaManager {
         player.setGameMode(GameMode.ADVENTURE);
         player.setAllowFlight(true);
         player.setFlying(true);
+        player.setInvisible(false);
         Arrays.stream(KitMetaData.values()).forEach(metaData -> player.removeMetadata(metaData.getKey(), FFA.getPlugin()));
         player.getActivePotionEffects().stream().map(PotionEffect::getType).forEach(player::removePotionEffect);
 
@@ -128,20 +131,19 @@ public class ArenaManager {
         inventory.setItem(13, new ItemStack(Material.BOWL, 32));
         inventory.setItem(14, new ItemStack(Material.RED_MUSHROOM, 32));
         inventory.setItem(15, new ItemStack(Material.BROWN_MUSHROOM, 32));
-        int itemCount = 0;
+        AtomicInteger itemCount = new AtomicInteger();
         for (AbstractKit kit : ffaPlayer.getKits()) {
             if (!kit.isUsingOffHand()) {
                 for (ItemStack kitItem : kit.getKitItems()) {
-                    itemCount++;
-                    inventory.setItem(1 + itemCount, kitItem);
+                    inventory.setItem(1 + itemCount.incrementAndGet(), kitItem);
                 }
             } else {
                 player.getInventory().setItemInOffHand(kit.getMainKitItem());
             }
-            kit.enable(PlayerList.getInstance().getKitPlayer(player));
+            kit.onEnable(PlayerList.getInstance().getKitPlayer(player));
         }
 
-        IntStream.range(0, 31 - itemCount).mapToObj(i -> new ItemStack(Material.MUSHROOM_STEW)).forEach(inventory::addItem);
+        IntStream.range(0, 31 - itemCount.get()).mapToObj(i -> new ItemStack(Material.MUSHROOM_STEW)).forEach(inventory::addItem);
     }
 
 
