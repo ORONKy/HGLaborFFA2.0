@@ -6,6 +6,7 @@ import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.utils.localization.Localization;
 import de.hglabor.utils.noriskutils.ChatUtils;
 import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
@@ -32,13 +33,23 @@ public class Tracker implements Listener {
     private Entity searchForCompassTarget(Player tracker) {
         for (FFAPlayer ffaPlayer : PlayerList.getInstance().getPlayersInArena()) {
             Entity possibleTarget = Bukkit.getEntity(ffaPlayer.getUUID());
-            if (possibleTarget == null) continue;
-            if (tracker == possibleTarget) continue;
-            if (possibleTarget.getLocation().distanceSquared(tracker.getLocation()) > 30.0) {
+            if (possibleTarget == null)
+                continue;
+            if (tracker == possibleTarget)
+                continue;
+            if (getDistanceBetween(tracker, possibleTarget) > 30.0) {
                 return possibleTarget;
             }
         }
         return null;
+    }
+
+    private double getDistanceBetween(Entity player, Entity player2) {
+        Location location = player.getLocation().clone();
+        Location location2 = player2.getLocation().clone();
+        location.setY(0);
+        location2.setY(0);
+        return location.distanceSquared(location2);
     }
 }
 
