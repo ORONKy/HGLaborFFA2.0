@@ -1,6 +1,7 @@
 package de.hglabor.plugins.ffa.kit;
 
 
+import com.google.common.collect.ImmutableMap;
 import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
@@ -8,6 +9,8 @@ import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
 import de.hglabor.plugins.kitapi.kit.kits.NoneKit;
 import de.hglabor.plugins.kitapi.kit.selector.KitSelector;
+import de.hglabor.utils.localization.Localization;
+import de.hglabor.utils.noriskutils.ChatUtils;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -56,7 +59,8 @@ public class KitSelectorImpl extends KitSelector {
                 FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
                 ffaPlayer.setKit(kit, index);
                 player.playSound(player.getLocation(), Sound.ENTITY_VILLAGER_YES, 1, 1);
-                //TODO: player.sendMessage(Localization.getMessage("kitSelection.pickMessage", ImmutableMap.of("kitName", kit.getName()), ffaPlayer.getLocale()));
+                player.sendMessage(Localization.INSTANCE.getMessage("kitSelection.pickMessage",
+                        ImmutableMap.of("kitName", kit.getName()), ChatUtils.getPlayerLocale(player)));
                 player.closeInventory();
                 if (ffaPlayer.getKits().stream().noneMatch(kits -> kits.equals(NoneKit.INSTANCE))) {
                     FFA.getArenaManager().teleportToArena(player);
