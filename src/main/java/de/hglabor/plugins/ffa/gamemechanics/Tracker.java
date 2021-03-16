@@ -8,11 +8,17 @@ import de.hglabor.utils.noriskutils.ChatUtils;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.craftbukkit.libs.org.apache.commons.lang3.tuple.Pair;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerInteractEvent;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 
 public class Tracker implements Listener {
 
@@ -31,17 +37,20 @@ public class Tracker implements Listener {
     }
 
     private Entity searchForCompassTarget(Player tracker) {
+        List<Pair<Entity,Double>> pairs = new ArrayList<>();
         for (FFAPlayer ffaPlayer : PlayerList.getInstance().getPlayersInArena()) {
             Entity possibleTarget = Bukkit.getEntity(ffaPlayer.getUUID());
             if (possibleTarget == null)
                 continue;
             if (tracker == possibleTarget)
                 continue;
-            if (getDistanceBetween(tracker, possibleTarget) > 30.0) {
-                return possibleTarget;
+            double distanceBetween = getDistanceBetween(tracker, possibleTarget);
+            if (distanceBetween > 30D) {
+                pairs.add(Pair.of(possibleTarget,distanceBetween));
             }
         }
-        return null;
+        Optional<Pair<Entity, Double>> target = pairs.stream().min(Comparator.comparingDouble(Pair::getRight));
+        return target.isEmpty() ? null : target.get().getLeft();
     }
 
     private double getDistanceBetween(Entity player, Entity player2) {
