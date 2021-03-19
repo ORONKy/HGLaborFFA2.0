@@ -8,6 +8,7 @@ import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
 import de.hglabor.plugins.kitapi.kit.kits.NoneKit;
 import de.hglabor.plugins.kitapi.kit.selector.KitSelector;
+import org.bukkit.ChatColor;
 import org.bukkit.Sound;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -16,6 +17,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
 public class KitSelectorImpl extends KitSelector {
+
+    public KitSelectorImpl() {
+        super(ChatColor.GOLD.toString() + ChatColor.BOLD + "Kit Selector");
+    }
 
     @EventHandler
     public void onKitSelectorClick(PlayerInteractEvent event) {

@@ -12,13 +12,13 @@ import com.sk89q.worldedit.function.operation.Operations;
 import com.sk89q.worldedit.regions.CuboidRegion;
 import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.config.FFAConfig;
-import de.hglabor.plugins.ffa.gamemechanics.SkyBorder;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.HideUtils;
 import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
 import de.hglabor.plugins.kitapi.kit.config.KitMetaData;
+import de.hglabor.plugins.kitapi.pvp.SkyBorder;
 import de.hglabor.utils.noriskutils.ItemBuilder;
 import de.hglabor.utils.noriskutils.WorldEditUtils;
 import de.hglabor.utils.noriskutils.feast.Feast;
@@ -50,7 +50,6 @@ public class ArenaManager {
         this.world = world;
         this.size = mapSize;
         this.skyBorder = new SkyBorder(FFAConfig.getInteger("border.skyborder.damage"));
-        this.skyBorder.runTaskTimer(FFA.getPlugin(), 0, 20);
         this.center = new Location(world, 0, 0, 0);
         this.schematic = new File(FFA.getPlugin().getDataFolder().getAbsolutePath() + "/arena.schem");
         this.feast = new Feast(FFA.getPlugin(), world).center(randomSpawn(50)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK);
@@ -204,6 +203,10 @@ public class ArenaManager {
 
     public void setFeast(Feast feast) {
         this.feast = feast;
+    }
+
+    public SkyBorder getSkyBorder() {
+        return skyBorder;
     }
 }
 
