@@ -6,6 +6,7 @@ import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.Sound;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -28,8 +29,11 @@ public class FFADeathListener implements Listener {
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
         World world = player.getWorld();
 
+        player.getWorld().strikeLightningEffect(player.getLocation());
+
         if (player.getKiller() != null) {
             Player killer = player.getKiller();
+            killer.playSound(killer.getLocation(), Sound.ENTITY_GUARDIAN_HURT, 1, 10);
             FFAPlayer ffaKiller = PlayerList.getInstance().getPlayer(killer);
             ffaKiller.increaseKills();
         }
