@@ -29,8 +29,6 @@ public class FFADeathListener implements Listener {
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
         World world = player.getWorld();
 
-        player.getWorld().strikeLightningEffect(player.getLocation());
-
         if (player.getKiller() != null) {
             Player killer = player.getKiller();
             killer.playSound(killer.getLocation(), Sound.ENTITY_GUARDIAN_HURT, 1, 10);
