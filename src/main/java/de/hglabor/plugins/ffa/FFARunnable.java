@@ -2,6 +2,8 @@ package de.hglabor.plugins.ffa;
 
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.world.ArenaManager;
+import de.hglabor.utils.noriskutils.ChatUtils;
+import de.hglabor.utils.noriskutils.TimeConverter;
 import de.hglabor.utils.noriskutils.feast.Feast;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -9,7 +11,10 @@ import org.bukkit.World;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.Calendar;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import static de.hglabor.utils.localization.Localization.t;
 
 public class FFARunnable extends BukkitRunnable {
     private final int resetDuration;
@@ -35,10 +40,17 @@ public class FFARunnable extends BukkitRunnable {
         if (timer.getAndDecrement() == resetDuration / 2) {
             arenaManager.getFeast().spawn();
         }
+        announceMapReset(timer.get());
         if (timer.get() <= 0) {
             timer.set(resetDuration);
             arenaManager.setFeast(new Feast(FFA.getPlugin(), world).center(arenaManager.randomSpawn(50)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK));
             arenaManager.reloadMap();
+        }
+    }
+
+    private void announceMapReset(int time) {
+        if (time <= 10 || time % 300 == 0) {
+            ChatUtils.broadcastMessage("ffa.mapReset", Map.of("time", TimeConverter.stringify(time)));
         }
     }
 
