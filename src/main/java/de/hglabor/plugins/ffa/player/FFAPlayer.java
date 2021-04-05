@@ -60,11 +60,6 @@ public class FFAPlayer extends KitPlayerImpl implements ScoreboardPlayer {
         this.status = status;
     }
 
-    //TODO yo
-    public boolean isInCombat() {
-        return false;
-    }
-
     @Override
     public Scoreboard getScoreboard() {
         return scoreboard;

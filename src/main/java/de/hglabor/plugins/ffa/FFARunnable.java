@@ -1,5 +1,6 @@
 package de.hglabor.plugins.ffa;
 
+import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.world.ArenaManager;
 import de.hglabor.utils.noriskutils.feast.Feast;
 import org.bukkit.Bukkit;
@@ -30,6 +31,7 @@ public class FFARunnable extends BukkitRunnable {
             return;
         }
         ArenaManager arenaManager = FFA.getArenaManager();
+        arenaManager.getSkyBorder().tick(PlayerList.getInstance().getPlayerEntitesInArena());
         if (timer.getAndDecrement() == resetDuration / 2) {
             arenaManager.getFeast().spawn();
         }

@@ -4,14 +4,14 @@ import de.hglabor.plugins.ffa.FFA;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.ScoreboardManager;
-import de.hglabor.utils.localization.Localization;
-import de.hglabor.utils.noriskutils.ChatUtils;
 import de.hglabor.utils.noriskutils.scoreboard.ScoreboardFactory;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
+
+import static de.hglabor.utils.localization.Localization.t;
 
 
 public class FFAJoinListener implements Listener {
@@ -23,8 +23,8 @@ public class FFAJoinListener implements Listener {
         FFAPlayer ffaPlayer = PlayerList.getInstance().getPlayer(player);
         PlayerList.getInstance().add(ffaPlayer);
         player.sendTitle(
-                Localization.INSTANCE.getMessage("hglabor.ffa.joinTitle", ChatUtils.getPlayerLocale(player)),
-                Localization.INSTANCE.getMessage("hglabor.ffa.lowerJoinTitle", ChatUtils.getPlayerLocale(player)),
+                t("hglabor.ffa.joinTitle", ffaPlayer.getLocale()),
+                t("hglabor.ffa.lowerJoinTitle", ffaPlayer.getLocale()),
                 20, 20, 20);
         ScoreboardFactory.create(ffaPlayer);
         ScoreboardManager.setBasicScoreboardLayout(ffaPlayer);

@@ -1,13 +1,14 @@
 package de.hglabor.plugins.ffa.player;
 
 import de.hglabor.plugins.kitapi.player.KitPlayer;
-import de.hglabor.plugins.kitapi.supplier.KitPlayerSupplier;
+import de.hglabor.plugins.kitapi.supplier.IPlayerList;
+import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
 
 import java.util.*;
 import java.util.stream.Collectors;
 
-public final class PlayerList implements KitPlayerSupplier {
+public final class PlayerList implements IPlayerList {
     private static final PlayerList instance = new PlayerList();
     private final Map<UUID, FFAPlayer> players;
 
@@ -54,5 +55,18 @@ public final class PlayerList implements KitPlayerSupplier {
 
     public static PlayerList getInstance() {
         return instance;
+    }
+
+    @Override
+    public List<Entity> getTrackingTargets() {
+        List<Entity> entites = new ArrayList<>();
+        getPlayersInArena().forEach(ffaPlayer -> ffaPlayer.getBukkitPlayer().ifPresent(entites::add));
+        return entites;
+    }
+
+    public List<Player> getPlayerEntitesInArena() {
+        List<Player> entites = new ArrayList<>();
+        getPlayersInArena().forEach(ffaPlayer -> ffaPlayer.getBukkitPlayer().ifPresent(entites::add));
+        return entites;
     }
 }
