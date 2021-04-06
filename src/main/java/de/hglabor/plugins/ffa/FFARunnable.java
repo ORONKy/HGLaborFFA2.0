@@ -1,6 +1,7 @@
 package de.hglabor.plugins.ffa;
 
 import de.hglabor.plugins.ffa.player.PlayerList;
+import de.hglabor.plugins.ffa.util.LocationUtils;
 import de.hglabor.plugins.ffa.world.ArenaManager;
 import de.hglabor.utils.noriskutils.ChatUtils;
 import de.hglabor.utils.noriskutils.TimeConverter;
@@ -43,7 +44,7 @@ public class FFARunnable extends BukkitRunnable {
         announceMapReset(timer.get());
         if (timer.get() <= 0) {
             timer.set(resetDuration);
-            arenaManager.setFeast(new Feast(FFA.getPlugin(), world).center(arenaManager.randomSpawn(50)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK));
+            arenaManager.setFeast(new Feast(FFA.getPlugin(), world).center(LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 4), 5)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK));
             arenaManager.reloadMap();
         }
     }

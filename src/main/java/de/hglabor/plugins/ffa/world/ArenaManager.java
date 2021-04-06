@@ -105,7 +105,7 @@ public class ArenaManager {
 
         KitApi.getInstance().getKitSelector().getKitSelectorItems().forEach(kitSelector -> player.getInventory().addItem(kitSelector));
 
-        Location location = LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 5).clone().add(0, 5, 0);
+        Location location = LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 5).clone().add(0, 1, 0);
         player.teleport(location);
     }
 

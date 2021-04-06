@@ -34,12 +34,15 @@ public final class LocationUtils {
 
         for (int i = seaLevel + 10; i > seaLevel - 10; i--) {
             Block block = world.getBlockAt(randomX, i, randomZ);
+            Location blockLoc = block.getLocation();
             Material type = block.getType();
             if (type.equals(GladiatorKit.INSTANCE.getMaterial()) || skipBlocks.contains(type)) {
                 continue;
             }
             if (block.isSolid() && block.getRelative(BlockFace.DOWN).isSolid()) {
-                return block.getLocation();
+                if (!blockLoc.clone().add(0, 1, 0).getBlock().isSolid() && !blockLoc.clone().add(0, 2, 0).getBlock().isSolid()) {
+                    return block.getLocation();
+                }
             }
         }
         return getHighestBlock(world, spread, tryCounter);
