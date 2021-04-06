@@ -16,6 +16,10 @@ public final class PlayerList implements IPlayerList {
         this.players = new HashMap<>();
     }
 
+    public static PlayerList getInstance() {
+        return instance;
+    }
+
     public FFAPlayer getPlayer(Player player) {
         return getPlayer(player.getUniqueId());
     }
@@ -41,6 +45,12 @@ public final class PlayerList implements IPlayerList {
         return getPlayer(player.getUniqueId());
     }
 
+    @Override
+    public KitPlayer getRandomAlivePlayer() {
+        List<FFAPlayer> playersInArena = getPlayersInArena();
+        return playersInArena.get(new Random().nextInt(playersInArena.size()));
+    }
+
     public List<FFAPlayer> getPlayers() {
         return new ArrayList<>(players.values());
     }
@@ -51,10 +61,6 @@ public final class PlayerList implements IPlayerList {
 
     public List<FFAPlayer> getPlayersInArena() {
         return players.values().stream().filter(FFAPlayer::isInArena).collect(Collectors.toList());
-    }
-
-    public static PlayerList getInstance() {
-        return instance;
     }
 
     @Override
