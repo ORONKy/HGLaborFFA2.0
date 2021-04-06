@@ -9,6 +9,7 @@ import de.hglabor.plugins.ffa.listener.FFAJoinListener;
 import de.hglabor.plugins.ffa.listener.FFAQuitListener;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
+import de.hglabor.plugins.ffa.util.LocationUtils;
 import de.hglabor.plugins.ffa.util.ScoreboardManager;
 import de.hglabor.plugins.ffa.world.ArenaManager;
 import de.hglabor.plugins.ffa.world.ArenaSettings;
@@ -35,6 +36,7 @@ import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.scheduler.BukkitRunnable;
 
 import java.nio.file.Paths;
 
@@ -78,6 +80,19 @@ public final class FFA extends JavaPlugin {
             });
             arenaManager.prepareKitSelection(onlinePlayer);
         }
+        //TODO refactorn
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                for (FFAPlayer ffaPlayer : PlayerList.getInstance().getPlayers()) {
+                    ffaPlayer.getBukkitPlayer().ifPresent(p -> {
+                        if (!p.getWorld().getWorldBorder().isInside(p.getLocation())) {
+                            p.teleport(LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 5).clone().add(0, 1, 0));
+                        }
+                    });
+                }
+            }
+        }.runTaskTimer(this, 0, 20 * 10L);
     }
 
     @Override
