@@ -31,6 +31,7 @@ import de.hglabor.utils.noriskutils.listener.RemoveHitCooldown;
 import de.hglabor.utils.noriskutils.scoreboard.ScoreboardFactory;
 import dev.jorel.commandapi.CommandAPI;
 import org.bukkit.Bukkit;
+import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
@@ -86,13 +87,14 @@ public final class FFA extends JavaPlugin {
             public void run() {
                 for (FFAPlayer ffaPlayer : PlayerList.getInstance().getPlayers()) {
                     ffaPlayer.getBukkitPlayer().ifPresent(p -> {
-                        if (!p.getWorld().getWorldBorder().isInside(p.getLocation())) {
-                            p.teleport(LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 5).clone().add(0, 1, 0));
+                        World pWorld = p.getWorld();
+                        if (!pWorld.getWorldBorder().isInside(p.getLocation())) {
+                            p.teleport(LocationUtils.getHighestBlock(pWorld, (int) (pWorld.getWorldBorder().getSize() / 2), 5).clone().add(0, 1, 0));
                         }
                     });
                 }
             }
-        }.runTaskTimer(this, 0, 20 * 10L);
+        }.runTaskTimer(this, 0, 20 * 5L);
     }
 
     @Override
