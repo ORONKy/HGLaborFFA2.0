@@ -45,6 +45,6 @@ public final class LocationUtils {
                 }
             }
         }
-        return getHighestBlock(world, spread, tryCounter);
+        return getHighestBlock(world, spread, tryCounter+1);
     }
 }

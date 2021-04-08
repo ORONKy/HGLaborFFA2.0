@@ -88,7 +88,7 @@ public final class FFA extends JavaPlugin {
                     ffaPlayer.getBukkitPlayer().ifPresent(p -> {
                         World pWorld = p.getWorld();
                         if (!pWorld.getWorldBorder().isInside(p.getLocation())) {
-                            p.teleport(LocationUtils.getHighestBlock(pWorld, (int) (pWorld.getWorldBorder().getSize() / 2), 5).clone().add(0, 1, 0));
+                            p.teleport(LocationUtils.getHighestBlock(pWorld, (int) (pWorld.getWorldBorder().getSize() / 2), 0).clone().add(0, 1, 0));
                         }
                     });
                 }

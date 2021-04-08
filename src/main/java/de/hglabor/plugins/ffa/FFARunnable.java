@@ -42,7 +42,7 @@ public class FFARunnable extends BukkitRunnable {
         announceMapReset(timer.get());
         if (timer.get() <= 0) {
             timer.set(resetDuration);
-            arenaManager.setFeast(new Feast(FFA.getPlugin(), world).center(LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 4), 5)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK));
+            arenaManager.setFeast(new Feast(FFA.getPlugin(), world).center(LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 4), 0)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK));
             arenaManager.reloadMap();
         }
     }

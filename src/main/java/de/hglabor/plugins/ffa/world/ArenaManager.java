@@ -46,7 +46,7 @@ public class ArenaManager {
         this.skyBorder = new SkyBorder(FFAConfig.getInteger("border.skyborder.damage"));
         this.center = new Location(world, 0, 0, 0);
         this.schematic = new File(FFA.getPlugin().getDataFolder().getAbsolutePath() + "/arena.schem");
-        this.feast = new Feast(FFA.getPlugin(), world).center(LocationUtils.getHighestBlock(world, 50, 5)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK);
+        this.feast = new Feast(FFA.getPlugin(), world).center(LocationUtils.getHighestBlock(world, 50, 0)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK);
         this.world.setTime(1000);
         this.world.setWeatherDuration(0);
         this.world.setThundering(false);
@@ -98,7 +98,7 @@ public class ArenaManager {
 
         KitApi.getInstance().getKitSelector().getKitSelectorItems().forEach(kitSelector -> player.getInventory().addItem(kitSelector));
 
-        Location location = LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 5).clone().add(0, 1, 0);
+        Location location = LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 0).clone().add(0, 1, 0);
         player.teleport(location);
     }
 
@@ -110,7 +110,7 @@ public class ArenaManager {
         player.setGameMode(GameMode.SURVIVAL);
         player.setAllowFlight(false);
         player.setFlying(false);
-        player.teleport(LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 5).clone().add(0, 1, 0));
+        player.teleport(LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 0).clone().add(0, 1, 0));
         this.giveArenaEquipment(player);
     }
 
