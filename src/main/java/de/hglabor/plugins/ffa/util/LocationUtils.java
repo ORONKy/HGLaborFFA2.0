@@ -27,12 +27,12 @@ public final class LocationUtils {
         int randomX = random.nextInt(spread + spread) - spread;
         int randomZ = random.nextInt(spread + spread) - spread;
 
-        if (tryCounter > 4) {
+        if (tryCounter > 8) {
             int highestY = world.getHighestBlockYAt(randomX, randomZ, HeightMap.MOTION_BLOCKING_NO_LEAVES);
             return new Location(world, randomX, highestY, randomZ);
         }
 
-        for (int i = seaLevel + 10; i > seaLevel - 10; i--) {
+        for (int i = seaLevel + 20; i > seaLevel - 10; i--) {
             Block block = world.getBlockAt(randomX, i, randomZ);
             Location blockLoc = block.getLocation();
             Material type = block.getType();

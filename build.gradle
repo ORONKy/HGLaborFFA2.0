@@ -16,6 +16,7 @@ repositories {
     maven {url = uri('http://repo.md-5.net/content/groups/public/')}
     maven { url "https://jitpack.io/" }
     maven {url = uri('https://repo.maven.apache.org/maven2/')}
+    maven {url = uri('https://raw.githubusercontent.com/SBPrime/AsyncWorldEdit/maven-artifact/')}
     // COMMAND API
     maven { url = "https://raw.githubusercontent.com/JorelAli/CommandAPI/mvn-repo/" }
     maven { url = "https://repo.codemc.org/repository/maven-public/" }
@@ -29,6 +30,7 @@ dependencies {
     compile 'de.hglabor:localization:0.0.6'
     compile 'de.hglabor:hglabor-utils:0.0.4'
     compile 'dev.jorel:commandapi-shade:5.8'
+    compileOnly 'org.primesoft.asyncworldedit:AsyncWorldEdit-API:[2.2.0-rc-01, 2.2.0)'
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.6.0-SNAPSHOT'
     compileOnly 'org.bukkit:craftbukkit:1.16.5-R0.1-SNAPSHOT'
     compileOnly 'com.sk89q.worldedit:worldedit-bukkit:7.2.0-SNAPSHOT'

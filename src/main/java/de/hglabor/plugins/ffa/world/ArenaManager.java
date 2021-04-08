@@ -1,9 +1,11 @@
 package de.hglabor.plugins.ffa.world;
 
 import com.sk89q.worldedit.EditSession;
+import com.sk89q.worldedit.MaxChangedBlocksException;
 import com.sk89q.worldedit.WorldEdit;
 import com.sk89q.worldedit.WorldEditException;
 import com.sk89q.worldedit.bukkit.BukkitAdapter;
+import com.sk89q.worldedit.bukkit.BukkitWorld;
 import com.sk89q.worldedit.extent.clipboard.BlockArrayClipboard;
 import com.sk89q.worldedit.extent.clipboard.io.BuiltInClipboardFormat;
 import com.sk89q.worldedit.extent.clipboard.io.ClipboardWriter;
@@ -16,12 +18,12 @@ import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
 import de.hglabor.plugins.ffa.util.HideUtils;
 import de.hglabor.plugins.ffa.util.LocationUtils;
+import de.hglabor.plugins.ffa.util.PasteAction;
 import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.plugins.kitapi.kit.AbstractKit;
 import de.hglabor.plugins.kitapi.kit.config.KitMetaData;
 import de.hglabor.plugins.kitapi.pvp.SkyBorder;
 import de.hglabor.utils.noriskutils.ItemBuilder;
-import de.hglabor.utils.noriskutils.WorldEditUtils;
 import de.hglabor.utils.noriskutils.feast.Feast;
 import org.bukkit.*;
 import org.bukkit.entity.Entity;
@@ -30,6 +32,12 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.util.BoundingBox;
+import org.primesoft.asyncworldedit.api.IAsyncWorldEdit;
+import org.primesoft.asyncworldedit.api.playerManager.IPlayerEntry;
+import org.primesoft.asyncworldedit.api.utils.IFuncParamEx;
+import org.primesoft.asyncworldedit.api.worldedit.IAsyncEditSessionFactory;
+import org.primesoft.asyncworldedit.api.worldedit.ICancelabeEditSession;
+import org.primesoft.asyncworldedit.api.worldedit.IThreadSafeEditSession;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -66,7 +74,6 @@ public class ArenaManager {
         this.world.setGameRule(GameRule.SPAWN_RADIUS, 0);
         this.world.setGameRule(GameRule.DO_LIMITED_CRAFTING, true);
         this.world.setGameRule(GameRule.SPECTATORS_GENERATE_CHUNKS, false);
-        this.copyMap();
     }
 
     public void prepareKitSelection(Player player) {
@@ -152,30 +159,11 @@ public class ArenaManager {
                 entity.remove();
             }
         }
-        WorldEditUtils.pasteSchematic(world, center, schematic);
-    }
-
-
-    private void copyMap() {
-        CuboidRegion region = new CuboidRegion(BukkitAdapter.adapt(this.world),
-                BukkitAdapter.asBlockVector(new Location(this.world, this.size, 0, this.size)),
-                BukkitAdapter.asBlockVector(new Location(this.world, -this.size, world.getMaxHeight(), -this.size)));
-
-        BlockArrayClipboard blockArrayClipboard = new BlockArrayClipboard(region);
-        blockArrayClipboard.setOrigin(BukkitAdapter.asBlockVector(this.center));
-
-        try (EditSession editSession = WorldEdit.getInstance().getEditSessionFactory().getEditSession(region.getWorld(), -1)) {
-            ForwardExtentCopy forwardExtentCopy = new ForwardExtentCopy(editSession, region, blockArrayClipboard, region.getMinimumPoint());
-            forwardExtentCopy.setCopyingEntities(true);
-            Operations.complete(forwardExtentCopy);
-        } catch (WorldEditException e) {
-            e.printStackTrace();
-        }
-
-        try (ClipboardWriter writer = BuiltInClipboardFormat.SPONGE_SCHEMATIC.getWriter(new FileOutputStream(schematic))) {
-            writer.write(blockArrayClipboard);
-        } catch (IOException e) {
-            e.printStackTrace();
+        IAsyncWorldEdit awe = (IAsyncWorldEdit)Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
+        if (awe != null) {
+            IPlayerEntry player = awe.getPlayerManager().getConsolePlayer();
+            IThreadSafeEditSession tsSession = ((IAsyncEditSessionFactory)WorldEdit.getInstance().getEditSessionFactory()).getThreadSafeEditSession(new BukkitWorld(world), -1, null, player);
+            awe.getBlockPlacer().performAsAsyncJob(tsSession, player, "loadWarGear:" + schematic.getName(), new PasteAction(schematic, center));
         }
     }
 

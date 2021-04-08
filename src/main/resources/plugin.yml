@@ -4,8 +4,8 @@ main: de.hglabor.plugins.ffa.FFA
 api-version: 1.16
 prefix: HGLaborFFA
 authors: [ NoRisk ]
-depend: [ "FastAsyncWorldEdit" ]
-softdepend: [ "LibsDisguises","ProtocolLib" ]
+depend: [  ]
+softdepend: [ "LibsDisguises","ProtocolLib","AsyncWorldEdit" ]
 description: FFA Plugin for HGLabor
 website: HGLabor.de
 commands:
