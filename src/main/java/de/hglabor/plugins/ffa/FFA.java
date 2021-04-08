@@ -31,7 +31,6 @@ import de.hglabor.utils.noriskutils.listener.RemoveHitCooldown;
 import de.hglabor.utils.noriskutils.scoreboard.ScoreboardFactory;
 import dev.jorel.commandapi.CommandAPI;
 import org.bukkit.Bukkit;
-import org.bukkit.Chunk;
 import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;

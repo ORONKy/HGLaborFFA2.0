@@ -15,8 +15,6 @@ import java.util.Calendar;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static de.hglabor.utils.localization.Localization.t;
-
 public class FFARunnable extends BukkitRunnable {
     private final int resetDuration;
     private final World world;
