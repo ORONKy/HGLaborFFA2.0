@@ -99,6 +99,7 @@ public final class FFA extends JavaPlugin {
     @Override
     public void onLoad() {
         plugin = this;
+        //disable this method or download localization files via https://github.com/HGLabor/LocalizationKeys/
         loadLocalizationFiles();
         FFAConfig.load();
         CommandAPI.onLoad(true);
@@ -131,7 +132,11 @@ public final class FFA extends JavaPlugin {
 
     private void loadLocalizationFiles() {
         try {
-            Localization.INSTANCE.loadLanguageFiles(Paths.get(FFA.getPlugin().getDataFolder() + "/lang"), "§");
+            //U+00A7 = §
+            String base = "/home/mcserver/shared_server_data/localization/";
+            Localization.INSTANCE.loadLanguageFiles(Paths.get(base,"FFA"), "\u00A7");
+            Localization.INSTANCE.loadLanguageFiles(Paths.get(base,"KitApi"), "\u00A7");
+            Localization.INSTANCE.loadLanguageFiles(Paths.get(base,"Staff"), "\u00A7");
         } catch (Exception e) {
             e.printStackTrace();
         }
