@@ -110,6 +110,7 @@ public class ArenaManager {
         player.setGameMode(GameMode.SURVIVAL);
         player.setAllowFlight(false);
         player.setFlying(false);
+        player.setFireTicks(0);
         player.teleport(LocationUtils.getHighestBlock(world, (int) (world.getWorldBorder().getSize() / 2), 0).clone().add(0, 1, 0));
         this.giveArenaEquipment(player);
     }
