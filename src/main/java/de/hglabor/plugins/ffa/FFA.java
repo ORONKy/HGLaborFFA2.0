@@ -6,6 +6,7 @@ import de.hglabor.plugins.ffa.config.FFAConfig;
 import de.hglabor.plugins.ffa.kit.KitSelectorImpl;
 import de.hglabor.plugins.ffa.listener.FFADeathListener;
 import de.hglabor.plugins.ffa.listener.FFAJoinListener;
+import de.hglabor.plugins.ffa.listener.FFAMoveListener;
 import de.hglabor.plugins.ffa.listener.FFAQuitListener;
 import de.hglabor.plugins.ffa.player.FFAPlayer;
 import de.hglabor.plugins.ffa.player.PlayerList;
@@ -118,6 +119,7 @@ public final class FFA extends JavaPlugin {
         pluginManager.registerEvents(new FFAJoinListener(), this);
         pluginManager.registerEvents(new FFAQuitListener(), this);
         pluginManager.registerEvents(new FFADeathListener(), this);
+        pluginManager.registerEvents(new FFAMoveListener(), this);
         //mechanics
         pluginManager.registerEvents(new SoupHealing(), this);
         pluginManager.registerEvents(new Tracker(30D, PlayerList.getInstance()), this);
