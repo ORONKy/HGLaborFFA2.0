@@ -28,7 +28,7 @@ dependencies {
     compile 'de.hglabor:kit-api:0.2.1'
     compile 'org.apache.commons:commons-lang3:3.11'
     compile 'de.hglabor:localization:0.0.7'
-    compile 'de.hglabor:hglabor-utils:0.0.4'
+    compile 'de.hglabor:hglabor-utils:0.0.5'
     compile 'dev.jorel:commandapi-shade:5.8'
     compileOnly 'org.primesoft.asyncworldedit:AsyncWorldEdit-API:[2.2.0-rc-01, 2.2.0)'
     compileOnly 'com.comphenix.protocol:ProtocolLib:4.6.0-SNAPSHOT'

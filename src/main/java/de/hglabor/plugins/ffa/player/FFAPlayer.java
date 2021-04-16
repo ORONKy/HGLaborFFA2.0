@@ -82,7 +82,7 @@ public class FFAPlayer extends KitPlayerImpl implements ScoreboardPlayer {
 
     @Override
     public Locale getLocale() {
-        return ChatUtils.getPlayerLocale(uuid);
+        return ChatUtils.locale(uuid);
     }
 
     @Override

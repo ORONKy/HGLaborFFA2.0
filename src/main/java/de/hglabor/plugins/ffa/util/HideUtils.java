@@ -54,7 +54,7 @@ public final class HideUtils implements Listener {
     }
 
     public void hideToInGamePlayers(Player playerToHide) {
-        bossBars.get(ChatUtils.getPlayerLocale(playerToHide.getUniqueId())).addPlayer(playerToHide);
+        bossBars.get(ChatUtils.locale(playerToHide.getUniqueId())).addPlayer(playerToHide);
         for (FFAPlayer playerInArena : PlayerList.getInstance().getPlayersInArena()) {
             Player player = playerInArena.getPlayer();
             player.hidePlayer(FFA.getPlugin(), playerToHide);
@@ -62,7 +62,7 @@ public final class HideUtils implements Listener {
     }
 
     public void makeVisibleToInGamePlayers(Player playerToShow) {
-        bossBars.get(ChatUtils.getPlayerLocale(playerToShow.getUniqueId())).removePlayer(playerToShow);
+        bossBars.get(ChatUtils.locale(playerToShow.getUniqueId())).removePlayer(playerToShow);
         for (FFAPlayer playerInArena : PlayerList.getInstance().getPlayersInArena()) {
             Player player = playerInArena.getPlayer();
             player.showPlayer(FFA.getPlugin(), playerToShow);

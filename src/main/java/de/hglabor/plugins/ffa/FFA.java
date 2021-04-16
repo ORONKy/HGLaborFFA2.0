@@ -16,7 +16,7 @@ import de.hglabor.plugins.ffa.world.ArenaSettings;
 import de.hglabor.plugins.kitapi.KitApi;
 import de.hglabor.plugins.kitapi.command.KitSettingsCommand;
 import de.hglabor.plugins.kitapi.kit.events.KitEventHandlerImpl;
-import de.hglabor.plugins.kitapi.kit.events.KitItemHandler;
+import de.hglabor.plugins.kitapi.kit.items.KitItemHandler;
 import de.hglabor.plugins.kitapi.listener.InventoryDetection;
 import de.hglabor.plugins.kitapi.listener.LastHitDetection;
 import de.hglabor.plugins.kitapi.pvp.CPSChecker;
@@ -41,6 +41,7 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.nio.file.Paths;
 
 public final class FFA extends JavaPlugin {
+    private final static String SHARED_SERVER_DATA = "/home/mcserver/shared_server_data/";
     private static FFA plugin;
     private static ArenaManager arenaManager;
     private static FFARunnable ffaRunnable;
@@ -59,7 +60,7 @@ public final class FFA extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        KitApi.getInstance().register(PlayerList.getInstance(), new KitSelectorImpl(), this);
+        KitApi.getInstance().register(PlayerList.getInstance(), new KitSelectorImpl(), this,Paths.get(SHARED_SERVER_DATA,"configs","ffa"));
         World world = Bukkit.getWorld("world");
         arenaManager = new ArenaManager(world, FFAConfig.getInteger("ffa.size"));
         ffaRunnable = new FFARunnable(world, FFAConfig.getInteger("ffa.duration"));
