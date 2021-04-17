@@ -43,7 +43,7 @@ public class ArenaManager {
     public ArenaManager(World world, int mapSize) {
         this.world = world;
         this.size = mapSize;
-        this.skyBorder = new SkyBorder(FFAConfig.getInteger("border.skyborder.damage"));
+        this.skyBorder = new SkyBorder(FFA.getPlugin(), FFAConfig.getInteger("border.skyborder.height"), FFAConfig.getInteger("border.skyborder.damage"));
         this.center = new Location(world, 0, 0, 0);
         this.schematic = new File(FFA.getPlugin().getDataFolder().getAbsolutePath() + "/arena.schem");
         this.feast = new Feast(FFA.getPlugin(), world).center(LocationUtils.getHighestBlock(world, 50, 0)).damageItems(true).radius(20).timer(300).material(Material.GRASS_BLOCK);
@@ -52,7 +52,7 @@ public class ArenaManager {
         this.world.setThundering(false);
         this.world.getWorldBorder().setCenter(this.center);
         this.world.getWorldBorder().setDamageAmount(6);
-        this.world.getWorldBorder().setSize(200);
+        this.world.getWorldBorder().setSize(mapSize*2);
         this.world.setGameRule(GameRule.DO_DAYLIGHT_CYCLE, false);
         this.world.setGameRule(GameRule.DO_WEATHER_CYCLE, false);
         this.world.setGameRule(GameRule.DO_TRADER_SPAWNING, false);
@@ -71,6 +71,7 @@ public class ArenaManager {
         ffaPlayer.setStatus(FFAPlayer.Status.KITSELECTION);
         ffaPlayer.getKits().forEach(kit -> kit.onDisable(ffaPlayer));
         ffaPlayer.setKills(0);
+        ffaPlayer.getLastHitInformation().clear();
         ffaPlayer.setKits(KitApi.getInstance().emptyKitList());
         //ffaPlayer.stopCombatTimer();
         ffaPlayer.resetKitAttributes();
@@ -145,10 +146,10 @@ public class ArenaManager {
                 entity.remove();
             }
         }
-        IAsyncWorldEdit awe = (IAsyncWorldEdit)Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
+        IAsyncWorldEdit awe = (IAsyncWorldEdit) Bukkit.getPluginManager().getPlugin("AsyncWorldEdit");
         if (awe != null) {
             IPlayerEntry player = awe.getPlayerManager().getConsolePlayer();
-            IThreadSafeEditSession tsSession = ((IAsyncEditSessionFactory)WorldEdit.getInstance().getEditSessionFactory()).getThreadSafeEditSession(new BukkitWorld(world), -1, null, player);
+            IThreadSafeEditSession tsSession = ((IAsyncEditSessionFactory) WorldEdit.getInstance().getEditSessionFactory()).getThreadSafeEditSession(new BukkitWorld(world), -1, null, player);
             awe.getBlockPlacer().performAsAsyncJob(tsSession, player, "loadWarGear:" + schematic.getName(), new PasteAction(schematic, center));
         }
     }

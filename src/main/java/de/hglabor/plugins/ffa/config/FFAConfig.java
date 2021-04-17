@@ -15,6 +15,7 @@ public class FFAConfig {
         FFA.getPlugin().getConfig().addDefault("damage.sword.nerf", 0.65);
         FFA.getPlugin().getConfig().addDefault("damage.other.nerf", 0.2);
         FFA.getPlugin().getConfig().addDefault("border.skyborder.damage", 5);
+        FFA.getPlugin().getConfig().addDefault("border.skyborder.height", 128);
         FFA.getPlugin().getConfig().options().copyDefaults(true);
         FFA.getPlugin().saveConfig();
     }
