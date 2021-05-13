@@ -42,7 +42,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import java.nio.file.Paths;
 
 public final class FFA extends JavaPlugin {
-    private final static String SHARED_SERVER_DATA = "/home/mcserver/shared_server_data/";
     private static FFA plugin;
     private static ArenaManager arenaManager;
     private static FFARunnable ffaRunnable;
@@ -61,7 +60,7 @@ public final class FFA extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        KitApi.getInstance().register(PlayerList.getInstance(), new KitSelectorImpl(), this,Paths.get(SHARED_SERVER_DATA,"configs","ffa"));
+        KitApi.getInstance().register(PlayerList.getInstance(), new KitSelectorImpl(), this, this.getDataFolder().toPath());
         World world = Bukkit.getWorld("world");
         arenaManager = new ArenaManager(world, FFAConfig.getInteger("ffa.size"));
         ffaRunnable = new FFARunnable(world, FFAConfig.getInteger("ffa.duration"));
@@ -136,10 +135,10 @@ public final class FFA extends JavaPlugin {
     private void loadLocalizationFiles() {
         try {
             //U+00A7 = §
-            String base = "/home/mcserver/shared_server_data/localization/";
-            Localization.INSTANCE.loadLanguageFiles(Paths.get(base,"FFA"), "\u00A7");
-            Localization.INSTANCE.loadLanguageFiles(Paths.get(base,"KitApi"), "\u00A7");
-            Localization.INSTANCE.loadLanguageFiles(Paths.get(base,"Staff"), "\u00A7");
+            String base = "/home/cloudnet/local/localization/";
+            Localization.INSTANCE.loadLanguageFiles(Paths.get(base, "FFA"), "\u00A7");
+            Localization.INSTANCE.loadLanguageFiles(Paths.get(base, "KitApi"), "\u00A7");
+            Localization.INSTANCE.loadLanguageFiles(Paths.get(base, "Staff"), "\u00A7");
         } catch (Exception e) {
             e.printStackTrace();
         }
